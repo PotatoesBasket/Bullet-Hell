@@ -1,3 +1,8 @@
+# aestival
+- bullet hell game
+- made for school (Diploma of Digital and Interactive Games at aie)
+- in progress!
+
 # aieBootstrap
 The base project code used for the Advanced Diploma of Professional Game Development to aid in graphical real-time applications.
 
