@@ -1,12 +1,13 @@
-#include "Bullet_HellApp.h"
+#include "Game.h"
+#include "Defines.h"
 
 int main() {
 	
 	// allocation
-	auto app = new Bullet_HellApp();
+	auto app = new Game();
 
 	// initialise and loop
-	app->run("AIE", 1280, 720, false);
+	app->run("aestivation", SCR_WIDTH, SCR_HEIGHT, false);
 
 	// deallocation
 	delete app;

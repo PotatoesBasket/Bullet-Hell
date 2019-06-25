@@ -1,13 +1,13 @@
 #pragma once
-
 #include "Application.h"
 #include "Renderer2D.h"
+#include "Player.h"
 
-class Bullet_HellApp : public aie::Application {
+class Game : public aie::Application {
 public:
 
-	Bullet_HellApp();
-	virtual ~Bullet_HellApp();
+	Game();
+	virtual ~Game();
 
 	virtual bool startup();
 	virtual void shutdown();
@@ -16,7 +16,9 @@ public:
 	virtual void draw();
 
 protected:
+	aie::Renderer2D* m_2dRenderer;
 
-	aie::Renderer2D*	m_2dRenderer;
-	aie::Font*			m_font;
+	aie::Font* m_font;
+
+	Player* m_player;
 };
