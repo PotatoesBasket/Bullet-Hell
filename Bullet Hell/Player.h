@@ -1,23 +1,22 @@
 #pragma once
-#include "Character.h"
+#include "SpriteObject.h"
 
-class Player : public Character
+class Player : public SpriteObject
 {
 public:
-	Player(Point2D position, char* filename, int maxHealth);
-	~Player();
+	Player(const char* filename, int maxHealth);
+	virtual ~Player() {}
 
-	void update(float deltaTime) override;
-	void draw(aie::Renderer2D* renderer) override;
+	virtual void onUpdate(float deltaTime);
 
-	float getPosX() { return m_position.x; }
-	float getPosY() { return m_position.y; }
+	float getPosX() { return getGlobalTransform().translation.x; }
+	float getPosY() { return getGlobalTransform().translation.y; }
 	float getVelX() { return m_velocity.x; }
 	float getVelY() { return m_velocity.y; }
 
 private:
-	float m_maxVelocity = 500;
-	float m_maxAcceleration = 100;
-	Point2D m_velocity{ 0, 0 };
-	Point2D m_acceleration{ 0, 0 };
+	float speed = 200;
+	Vector3 m_velocity{ 0, 0, 0 };
+	Vector3 m_maxVelocity{ 200, 200, 0 };
+	Vector3 m_acceleration{ 30, 30, 0 };
 };

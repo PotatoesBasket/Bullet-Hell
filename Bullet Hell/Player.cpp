@@ -1,94 +1,31 @@
 #include "Player.h"
 #include <Input.h>
 
-Player::Player(Point2D position, char* filename, int maxHealth) :
-	Character(position, filename, maxHealth)
+Player::Player(const char* texture, int maxHealth)
 {
-	
+	load(texture);
+	setPosition(300, 350);
 }
 
-Player::~Player()
-{
-	delete m_texture;
-}
-
-void Player::update(float deltaTime)
+void Player::onUpdate(float deltaTime)
 {
 	aie::Input* input = aie::Input::getInstance();
 
-	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
+	if (input->isKeyDown(aie::INPUT_KEY_D))
 	{
-		m_acceleration.x += 0.05f;
-
-		if (m_acceleration.x > 50)
-			m_acceleration.x = 50;
-
-		m_velocity.x += m_acceleration.x;
-
-		if (m_velocity.x > m_maxVelocity)
-			m_velocity.x = m_maxVelocity;
+		move(Vector2(1, 0) * deltaTime * speed);
 	}
-	else if (input->isKeyDown(aie::INPUT_KEY_LEFT))
+	else if (input->isKeyDown(aie::INPUT_KEY_A))
 	{
-		m_acceleration.x += 0.05f;
-
-		if (m_acceleration.x > 50)
-			m_acceleration.x = 50;
-
-		m_velocity.x -= m_acceleration.x;
-
-		if (m_velocity.x < -m_maxVelocity)
-			m_velocity.x = -m_maxVelocity;
-	}
-	else
-	{
-		if (m_acceleration.x > 0)
-			m_acceleration.x -= 0.1f;
-		
-		if (m_acceleration.x < 0)
-			m_acceleration.x = 0;
-
-		m_velocity.x = 0;
+		move(Vector2(-1, 0) * deltaTime * speed);
 	}
 
-	if (input->isKeyDown(aie::INPUT_KEY_UP))
+	if (input->isKeyDown(aie::INPUT_KEY_W))
 	{
-		m_acceleration.y += 0.05f;
-
-		if (m_acceleration.y > 50)
-			m_acceleration.y = 50;
-
-		m_velocity.y += m_acceleration.y;
-
-		if (m_velocity.y > m_maxVelocity)
-			m_velocity.y = m_maxVelocity;
+		move(Vector2(0, 1) * deltaTime * speed);
 	}
-	else if (input->isKeyDown(aie::INPUT_KEY_DOWN))
+	else if (input->isKeyDown(aie::INPUT_KEY_S))
 	{
-		m_acceleration.y += 0.05f;
-
-		if (m_acceleration.y > 50)
-			m_acceleration.y = 50;
-
-		m_velocity.y -= m_acceleration.y;
-
-		if (m_velocity.y < -m_maxVelocity)
-			m_velocity.y = -m_maxVelocity;
+		move(Vector2(0, -1) * deltaTime * speed);
 	}
-	else
-	{
-		if (m_acceleration.y > 0)
-			m_acceleration.y -= 0.1f;
-
-		if (m_acceleration.y < 0)
-			m_acceleration.y = 0;
-	}
-
-	m_position += m_velocity * deltaTime;
-}
-
-void Player::draw(aie::Renderer2D* renderer)
-{
-	renderer->drawCircle(m_position.x, m_position.y, 20, 0);
-	renderer->drawSprite(m_texture, 600, 500, 80, 93, 0, 1, 0.5f, 0.5f);
 }

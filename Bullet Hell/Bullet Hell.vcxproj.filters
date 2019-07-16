@@ -24,15 +24,18 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -47,7 +50,7 @@
     <ClInclude Include="Save.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Point2D.h">
+    <ClInclude Include="SpriteObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

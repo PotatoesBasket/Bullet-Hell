@@ -20,7 +20,7 @@ bool Game::startup() {
 
 	m_2dRenderer = new aie::Renderer2D();
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
-	m_player = new Player({ 0, 0 }, "..bin/textures/placeholder/ship.png", playerHealth);
+	m_player = new Player("../bin/textures/placeholder/player.png", playerHealth);
 
 	return true;
 }
@@ -62,12 +62,13 @@ void Game::draw() {
 	char vy[50];
 	sprintf_s(vy, 50, "velY: %i", (int)m_player->getVelY());
 
-	m_2dRenderer->drawText(m_font, vy, 0, 200);
-	m_2dRenderer->drawText(m_font, vx, 0, 150);
-	m_2dRenderer->drawText(m_font, y, 0, 100);
-	m_2dRenderer->drawText(m_font, x, 0, 50);
+	m_2dRenderer->drawText(m_font, fps, 10, 270);
+	m_2dRenderer->drawText(m_font, vy, 10, 220);
+	m_2dRenderer->drawText(m_font, vx, 10, 170);
+	m_2dRenderer->drawText(m_font, y, 10, 120);
+	m_2dRenderer->drawText(m_font, x, 10, 70);
 
-	m_2dRenderer->drawText(m_font, "Press ESC to quit", 0, 0);
+	m_2dRenderer->drawText(m_font, "WASD - move, ESC - quit", 10, 20);
 
 	m_2dRenderer->end();
 }

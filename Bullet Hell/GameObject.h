@@ -1,24 +1,51 @@
 #pragma once
-#include "Point2D.h"
-#include "Texture.h"
+#include <vector>
 #include <Renderer2D.h>
-#include <string>
+#include <MathLibrary.h>
 
 class GameObject
 {
 public:
-	GameObject(Point2D position, char* filename) :
-		m_position{ position },
-		m_texture{ new aie::Texture(filename) } {}
+	GameObject() {}
+	virtual ~GameObject()
+	{
+		if (m_parent != nullptr)
+			m_parent->removeChild(this);
 
-	virtual ~GameObject() {}
+		for (auto child : m_children)
+			child->m_parent = nullptr;
+	}
 
-	virtual void update(float deltaTime) = 0;
-	virtual void draw(aie::Renderer2D* renderer) = 0;
-	
-	Point2D getPos() { return m_position; }
+	GameObject* getParent() const { return m_parent; }
+	GameObject* getChild(unsigned int index) const { return m_children[index]; }
+	const Matrix3& getLocalTransform() const { return m_localTransform; }
+	const Matrix3& getGlobalTransform() const { return m_globalTransform; }
+
+	unsigned int childCount() const { return m_children.size(); }
+
+	void addChild(GameObject* child);
+	void removeChild(GameObject* child);
+
+	void update(float deltaTime);
+	void updateTransform();
+	virtual void onUpdate(float deltaTime) {};
+
+	void draw(aie::Renderer2D* renderer);
+	virtual void onDraw(aie::Renderer2D* renderer) {};
+
+	void setPosition(float x, float y);
+	void setRotation(float radians);
+	void setScale(float width, float height);
+	void move(float x, float y);
+	void move(const Vector2& v);
+	void rotate(float radians);
+	void scale(float width, float height);
+	void scale(const Vector2& v);
 
 protected:
-	Point2D m_position;
-	aie::Texture* m_texture;
+	GameObject* m_parent = nullptr;
+	std::vector<GameObject*> m_children;
+
+	Matrix3 m_localTransform = Matrix3::identity;
+	Matrix3 m_globalTransform = Matrix3::identity;
 };
