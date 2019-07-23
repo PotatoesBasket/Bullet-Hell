@@ -6,49 +6,49 @@
 #include <string>
 #include <cstring>
 
-Game::Game() {
+Game::Game() {}
+Game::~Game() {}
 
-}
-
-Game::~Game() {
-
-}
-
-bool Game::startup() {
-	
+bool Game::startup()
+{
 	int playerHealth = 300;
 
 	m_2dRenderer = new aie::Renderer2D();
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
-	m_player = new Player("../bin/textures/placeholder/player.png", playerHealth);
+	m_player = new Player("../bin/textures/placeholder/player.png", Vector2(300, 350));
+	m_enemy = new Enemy("../bin/textures/placeholder/lilbigbro.png", Vector2(900, 350));
+	m_enemy->scale(4, 4);
 
 	return true;
 }
 
-void Game::shutdown() {
-
+void Game::shutdown()
+{
+	delete m_enemy;
 	delete m_player;
 	delete m_font;
 	delete m_2dRenderer;
 }
 
-void Game::update(float deltaTime) {
-
+void Game::update(float deltaTime)
+{
 	aie::Input* input = aie::Input::getInstance();
 
 	m_player->update(deltaTime);
+	m_enemy->update(deltaTime);
 
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
 		quit();
 }
 
-void Game::draw() {
-
+void Game::draw()
+{
 	clearScreen();
 
 	m_2dRenderer->begin();
 
 	m_player->draw(m_2dRenderer);
+	m_enemy->draw(m_2dRenderer);
 
 	char fps[32];
 	sprintf_s(fps, 32, "FPS: %i", getFPS());

@@ -1,10 +1,12 @@
 #include "Player.h"
+#include "Sprite.h"
 #include <Input.h>
 
-Player::Player(const char* texture, int maxHealth)
+Player::Player(const char* texture, Vector2 startPos)
 {
-	load(texture);
-	setPosition(300, 350);
+	std::shared_ptr<Sprite> sprite = std::make_shared<Sprite>(texture);
+	addComponent(sprite);
+	setPosition(startPos);
 }
 
 void Player::onUpdate(float deltaTime)

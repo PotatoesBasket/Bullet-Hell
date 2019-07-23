@@ -1,30 +1,18 @@
 #pragma once
 #include <vector>
+#include <memory>
 #include <Renderer2D.h>
 #include <MathLibrary.h>
+
+class Component;
 
 class GameObject
 {
 public:
 	GameObject() {}
-	virtual ~GameObject()
-	{
-		if (m_parent != nullptr)
-			m_parent->removeChild(this);
+	virtual ~GameObject();
 
-		for (auto child : m_children)
-			child->m_parent = nullptr;
-	}
-
-	GameObject* getParent() const { return m_parent; }
-	GameObject* getChild(unsigned int index) const { return m_children[index]; }
-	const Matrix3& getLocalTransform() const { return m_localTransform; }
-	const Matrix3& getGlobalTransform() const { return m_globalTransform; }
-
-	unsigned int childCount() const { return m_children.size(); }
-
-	void addChild(GameObject* child);
-	void removeChild(GameObject* child);
+	//Updating and drawing
 
 	void update(float deltaTime);
 	void updateTransform();
@@ -33,19 +21,53 @@ public:
 	void draw(aie::Renderer2D* renderer);
 	virtual void onDraw(aie::Renderer2D* renderer) {};
 
+	//Transform
+
+	const Matrix3& getLocalTransform() const { return m_localTransform; }
+	const Matrix3& getGlobalTransform() const { return m_globalTransform; }
+	float* getLocalTransformFloat() const { return (float*)&m_localTransform; }
+	float* getGlobalTransformFloat() const { return (float*)&m_globalTransform; }
+
 	void setPosition(float x, float y);
+	void setPosition(const Vector2& v);
 	void setRotation(float radians);
-	void setScale(float width, float height);
+	void setScale(float wMultiplier, float hMultiplier);
+	void setScale(float multiplier);
 	void move(float x, float y);
 	void move(const Vector2& v);
 	void rotate(float radians);
-	void scale(float width, float height);
-	void scale(const Vector2& v);
+	void scale(float wMultiplier, float hMultiplier);
+	void scale(float multiplier);
+
+	//Hierarchy
+
+	GameObject* getParent() const { return m_parent; }
+	GameObject* getChild(unsigned int index) const { return m_children[index]; }
+
+	unsigned int childCount() const { return m_children.size(); }
+
+	void addChild(GameObject* child);
+	void removeChild(GameObject* child);
+
+	//Components
+
+	void addComponent(const std::shared_ptr<Component>& component);
+	void removeComponent(const std::shared_ptr<Component>& component);
 
 protected:
+	Matrix3 m_localTransform = Matrix3::identity;
+	Matrix3 m_globalTransform = Matrix3::identity;
+
 	GameObject* m_parent = nullptr;
 	std::vector<GameObject*> m_children;
 
-	Matrix3 m_localTransform = Matrix3::identity;
-	Matrix3 m_globalTransform = Matrix3::identity;
+	std::vector<std::shared_ptr<Component>> m_components;
+};
+
+class Component
+{
+public:
+	virtual ~Component() {}
+	virtual void update(GameObject* gameObject, float deltaTime) = 0;
+	virtual void draw(GameObject* gameObject, aie::Renderer2D* renderer) = 0;
 };

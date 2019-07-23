@@ -1,14 +1,15 @@
 #pragma once
-#include "SpriteObject.h"
+#include "GameObject.h"
 
-class Player : public SpriteObject
+class Player : public GameObject
 {
 public:
-	Player(const char* filename, int maxHealth);
-	virtual ~Player() {}
+	Player(const char* texture, Vector2 startPos);
+	~Player() {}
 
-	virtual void onUpdate(float deltaTime);
+	void onUpdate(float deltaTime) override;
 
+	//debug stuff
 	float getPosX() { return getGlobalTransform().translation.x; }
 	float getPosY() { return getGlobalTransform().translation.y; }
 	float getVelX() { return m_velocity.x; }

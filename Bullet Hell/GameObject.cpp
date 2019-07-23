@@ -1,33 +1,33 @@
 #include "GameObject.h"
 
-void GameObject::addChild(GameObject* child)
+GameObject::~GameObject()
 {
-	if (!child->m_parent) //make sure object isn't already parented to something
-	{
-		child->m_parent = this; //assign parent to child
-		m_children.push_back(child); //add child to parent's list of children
-	}
+	if (m_parent != nullptr)
+		m_parent->removeChild(this);
+
+	for (auto child : m_children)
+		child->m_parent = nullptr;
 }
 
-void GameObject::removeChild(GameObject* child)
-{
-	auto it = std::find(m_children.begin(), m_children.end(), child); //find child in list
+//////////////////////////////
+//   Updating and Drawing   //
+//////////////////////////////
 
-	if (it != m_children.end())
-	{
-		m_children.erase(it); //remove child from list
-		child->m_parent = nullptr; //remove parent from child
-	}
-}
-
+/*Calls update on the object itself, then its components, then its children.*/
 void GameObject::update(float deltaTime)
 {
 	onUpdate(deltaTime);
+
+	for (auto component : m_components)
+		component->update(this, deltaTime);
 
 	for (auto child : m_children)
 		child->update(deltaTime);
 }
 
+/*Updates the object's transform taking the parent's transform into account,
+then does the same for its children.
+- Needs to be called within all Transform member functions.*/
 void GameObject::updateTransform()
 {
 	if (m_parent != nullptr)
@@ -39,17 +39,31 @@ void GameObject::updateTransform()
 		child->updateTransform();
 }
 
-void GameObject::draw(aie::Renderer2D * renderer)
+/*Calls draw on the object itself, then its components, then its children.*/
+void GameObject::draw(aie::Renderer2D* renderer)
 {
 	onDraw(renderer);
+
+	for (auto component : m_components)
+		component->draw(this, renderer);
 
 	for (auto child : m_children)
 		child->draw(renderer);
 }
 
+///////////////////
+//   Transform   //
+///////////////////
+
 void GameObject::setPosition(float x, float y)
 {
 	m_localTransform.translation = { x, y, 1 };
+	updateTransform();
+}
+
+void GameObject::setPosition(const Vector2& v)
+{
+	m_localTransform.translation = { v.x, v.y, 1 };
 	updateTransform();
 }
 
@@ -59,9 +73,15 @@ void GameObject::setRotation(float radians)
 	updateTransform();
 }
 
-void GameObject::setScale(float width, float height)
+void GameObject::setScale(float wMultiplier, float hMultiplier)
 {
-	m_localTransform.setScaled(width, height, 1);
+	m_localTransform.setScaled(wMultiplier, hMultiplier, 1);
+	updateTransform();
+}
+
+void GameObject::setScale(float multiplier)
+{
+	m_localTransform.setScaled(multiplier, multiplier, 1);
 	updateTransform();
 }
 
@@ -82,14 +102,55 @@ void GameObject::rotate(float radians)
 	updateTransform();
 }
 
-void GameObject::scale(float width, float height)
+void GameObject::scale(float wMultiplier, float hMultiplier)
 {
-	m_localTransform.scale(width, height, 1);
+	m_localTransform.scale(wMultiplier, hMultiplier, 1);
 	updateTransform();
 }
 
-void GameObject::scale(const Vector2& v)
+void GameObject::scale(float multiplier)
 {
-	m_localTransform.scale(Vector3(v.x, v.y, 1));
+	m_localTransform.scale(Vector3(multiplier, multiplier, 1));
 	updateTransform();
+}
+
+///////////////////
+//   Hierarchy   //
+///////////////////
+
+void GameObject::addChild(GameObject* child)
+{
+	if (!child->m_parent) //make sure object isn't already parented to something
+	{
+		child->m_parent = this; //assign parent to child
+		m_children.push_back(child); //add child to parent's list of children
+	}
+}
+
+void GameObject::removeChild(GameObject* child)
+{
+	auto it = std::find(m_children.begin(), m_children.end(), child); //find child in list
+
+	if (it != m_children.end())
+	{
+		m_children.erase(it); //remove child from list
+		child->m_parent = nullptr; //remove parent from child
+	}
+}
+
+/////////////////////
+//   Components   ///
+/////////////////////
+
+void GameObject::addComponent(const std::shared_ptr<Component>& component)
+{
+	m_components.push_back(component);
+}
+
+void GameObject::removeComponent(const std::shared_ptr<Component>& component)
+{
+	auto it = std::find(m_components.begin(), m_components.end(), component);
+
+	if (it != m_components.end())
+		m_components.erase(it);
 }
