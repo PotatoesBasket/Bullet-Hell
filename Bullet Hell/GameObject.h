@@ -54,7 +54,10 @@ public:
 
 	void addComponent(const std::shared_ptr<Component>& component);
 	void removeComponent(const std::shared_ptr<Component>& component);
-	std::shared_ptr<Component> getComponent(std::string name) const;
+	std::shared_ptr<Component> getComponent(std::string name);
+
+	void allComponentsOn();
+	void allComponentsOff();
 
 protected:
 	Matrix3 m_localTransform = Matrix3::identity;
@@ -70,11 +73,16 @@ class Component
 {
 public:
 	virtual ~Component() {}
+
 	virtual void update(GameObject* gameObject, float deltaTime) = 0;
 	virtual void draw(GameObject* gameObject, aie::Renderer2D* renderer) = 0;
+	
+	bool isActive() const { return m_active; }
+	std::string name() const { return m_name; }
 
-	std::string name() { return m_name; }
+	void setActive(bool state) { m_active = state; }
 
 private:
+	bool m_active = false;
 	std::string m_name = "0";
 };

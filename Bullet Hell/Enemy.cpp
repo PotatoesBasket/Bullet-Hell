@@ -12,4 +12,6 @@ Enemy::Enemy(const char* texture, Vector2 startPos, float width, float height, f
 
 	m_hurtbox = std::make_shared<CircleBoundary>(startPos, hurtRadius);
 	addComponent(m_hurtbox);
+
+	allComponentsOn();
 }

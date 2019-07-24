@@ -7,14 +7,14 @@
 class Game : public aie::Application
 {
 public:
-	Game();
-	virtual ~Game();
+	Game() {};
+	~Game() {};
 
-	virtual bool startup();
-	virtual void shutdown();
+	bool startup() override;
+	void shutdown() override;
 
-	virtual void update(float deltaTime);
-	virtual void draw();
+	void update(float deltaTime) override;
+	void draw() override;
 
 protected:
 	aie::Renderer2D* m_2dRenderer = nullptr;

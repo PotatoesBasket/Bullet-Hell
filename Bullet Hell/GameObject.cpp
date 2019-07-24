@@ -19,7 +19,8 @@ void GameObject::update(float deltaTime)
 	onUpdate(deltaTime);
 
 	for (auto component : m_components)
-		component->update(this, deltaTime);
+		if (component->isActive())
+			component->update(this, deltaTime);
 
 	for (auto child : m_children)
 		child->update(deltaTime);
@@ -45,7 +46,8 @@ void GameObject::draw(aie::Renderer2D* renderer)
 	onDraw(renderer);
 
 	for (auto component : m_components)
-		component->draw(this, renderer);
+		if (component->isActive())
+			component->draw(this, renderer);
 
 	for (auto child : m_children)
 		child->draw(renderer);
@@ -158,7 +160,7 @@ void GameObject::removeComponent(const std::shared_ptr<Component>& component)
 /*Will return null if component cannot be found. Not really meant
 for components that can have multiples on one GameObject, but if you try,
 it will return the first instance of that component.*/
-std::shared_ptr<Component> GameObject::getComponent(std::string name) const
+std::shared_ptr<Component> GameObject::getComponent(std::string name)
 {
 	for (auto component : m_components)
 	{
@@ -167,4 +169,16 @@ std::shared_ptr<Component> GameObject::getComponent(std::string name) const
 	}
 	
 	return nullptr;
+}
+
+void GameObject::allComponentsOn()
+{
+	for (auto& component : m_components)
+		component->setActive(true);
+}
+
+void GameObject::allComponentsOff()
+{
+	for (auto& component : m_components)
+		component->setActive(false);
 }

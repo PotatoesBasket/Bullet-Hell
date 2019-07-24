@@ -11,7 +11,10 @@ public:
 	~Player() {}
 
 	bool isAlive() const { return m_alive; }
-	
+
+	void checkInputs(float deltaTime);
+	void checkCollisions();
+
 	void onUpdate(float deltaTime) override;
 
 	//debug stuff
@@ -21,7 +24,7 @@ public:
 	float getVelY() { return m_velocity.y; }
 
 private:
-	bool m_alive = true;
+	bool m_alive = false;
 
 	const float m_width = 55;
 	const float m_height = 75;
