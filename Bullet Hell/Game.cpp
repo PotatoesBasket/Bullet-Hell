@@ -16,7 +16,7 @@ bool Game::startup()
 	m_2dRenderer = new aie::Renderer2D();
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 	m_player = new Player("../bin/textures/placeholder/player.png", Vector2(300, 350));
-	m_enemy = new Enemy("../bin/textures/placeholder/lilbigbro.png", Vector2(900, 350));
+	m_enemy = new Enemy("../bin/textures/placeholder/lilbigbro.png", Vector2(900, 350), 50, 50, 0.9f);
 	m_enemy->scale(4, 4);
 
 	return true;

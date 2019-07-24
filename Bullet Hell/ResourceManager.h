@@ -56,7 +56,7 @@ public:
 		}
 	}
 
-	int getCount() const { return m_resources.size(); }
+	size_t getCount() const { return m_resources.size(); }
 
 	/*Iterates through resource vector and erases any resources
 	that are currently only being referenced by the manager.*/

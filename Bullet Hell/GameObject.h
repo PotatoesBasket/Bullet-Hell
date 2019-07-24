@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include <string>
 #include <Renderer2D.h>
-#include <MathLibrary.h>
+#include "MathLibrary.h"
 
 class Component;
 
@@ -44,7 +45,7 @@ public:
 	GameObject* getParent() const { return m_parent; }
 	GameObject* getChild(unsigned int index) const { return m_children[index]; }
 
-	unsigned int childCount() const { return m_children.size(); }
+	size_t childCount() const { return m_children.size(); }
 
 	void addChild(GameObject* child);
 	void removeChild(GameObject* child);
@@ -53,6 +54,7 @@ public:
 
 	void addComponent(const std::shared_ptr<Component>& component);
 	void removeComponent(const std::shared_ptr<Component>& component);
+	std::shared_ptr<Component> getComponent(std::string name) const;
 
 protected:
 	Matrix3 m_localTransform = Matrix3::identity;
@@ -70,4 +72,9 @@ public:
 	virtual ~Component() {}
 	virtual void update(GameObject* gameObject, float deltaTime) = 0;
 	virtual void draw(GameObject* gameObject, aie::Renderer2D* renderer) = 0;
+
+	std::string name() { return m_name; }
+
+private:
+	std::string m_name = "0";
 };

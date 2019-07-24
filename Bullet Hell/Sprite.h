@@ -7,7 +7,7 @@ class Sprite : public Component
 {
 public:
 	Sprite(const char* filename) { load(filename); }
-	~Sprite() {};
+	~Sprite() {}
 
 	void load(const char* filename);
 

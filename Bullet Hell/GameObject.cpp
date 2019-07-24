@@ -154,3 +154,17 @@ void GameObject::removeComponent(const std::shared_ptr<Component>& component)
 	if (it != m_components.end())
 		m_components.erase(it);
 }
+
+/*Will return null if component cannot be found. Not really meant
+for components that can have multiples on one GameObject, but if you try,
+it will return the first instance of that component.*/
+std::shared_ptr<Component> GameObject::getComponent(std::string name) const
+{
+	for (auto component : m_components)
+	{
+		if (component->name() == name)
+			return component;
+	}
+	
+	return nullptr;
+}
