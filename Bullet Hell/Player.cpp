@@ -20,7 +20,7 @@ Player::Player(const char* texture, Vector2 startPos)
 	m_hurtbox = std::make_shared<CircleBoundary>(startPos, m_hurtRadius);
 	addComponent(m_hurtbox);
 
-	m_emitter = std::make_shared<BulletEmitter>();
+	m_emitter = std::make_shared<BulletEmitter>("../bin/textures/placeholder/bullet.png", 0);
 	addChild(m_emitter.get());
 	m_emitter->setPosition(50, 0);
 }

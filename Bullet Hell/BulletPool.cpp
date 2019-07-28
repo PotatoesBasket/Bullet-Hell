@@ -18,16 +18,21 @@ BulletPool::~BulletPool()
 		delete bullet;
 }
 
+/*Looks for the first inactive bullet in bullet list and activates it.*/
 void BulletPool::activateNext(GameObject* origin)
 {
-	if (m_activeCount < m_totalCount)
+	std::vector<Bullet*>::iterator it = m_bulletList.begin();
+
+	for (; it != m_bulletList.end(); ++it)
 	{
-		m_bulletList[m_activeCount]->setPosition(
-			origin->getGlobalTransform().translation.x,
-			origin->getGlobalTransform().translation.y);
-		m_bulletList[m_activeCount]->setActiveState(true);
-		m_bulletList[m_activeCount]->allComponentsOn();
-		++m_activeCount;
+		if ((*it)->getActiveState() == false)
+		{
+			(*it)->setPosition(
+				origin->getGlobalTransform().translation.x,
+				origin->getGlobalTransform().translation.y);
+			(*it)->setActiveState(true);
+			break;
+		}
 	}
 }
 

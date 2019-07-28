@@ -5,7 +5,7 @@
 class BulletEmitter : public GameObject
 {
 public:
-	BulletEmitter();
+	BulletEmitter(const char* bulletFilename, float rotation);
 	~BulletEmitter() {}
 
 	void fire();

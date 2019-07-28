@@ -1,5 +1,4 @@
 #include "Bullet.h"
-#include <iostream>
 
 Bullet::Bullet(const char* filename, float lifetime, float speed) :
 	m_lifetime(lifetime), m_speed(speed)
@@ -26,8 +25,6 @@ void Bullet::checkLifetime(float deltaTime)
 	{
 		m_timer = 0;
 		m_alive = false;
-		allComponentsOff();
-		std::cout << "bullet turned off\n";
 	}
 }
 

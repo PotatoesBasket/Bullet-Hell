@@ -1,8 +1,8 @@
 #include "BulletEmitter.h"
 
-BulletEmitter::BulletEmitter()
+BulletEmitter::BulletEmitter(const char* bulletFilename, float rotation)
 {
-	m_pool = std::make_shared<BulletPool>("../bin/textures/placeholder/bullet.png", 100, 5.0f, 400.0f);
+	m_pool = std::make_shared<BulletPool>(bulletFilename, 100, 5.0f, 400.0f);
 	addComponent(m_pool);
 
 	m_test = std::make_shared<Sprite>("../bin/textures/placeholder/emitter.png");
