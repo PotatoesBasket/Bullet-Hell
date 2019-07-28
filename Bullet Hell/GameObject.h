@@ -13,6 +13,9 @@ public:
 	GameObject() {}
 	virtual ~GameObject();
 
+	bool getActiveState() const { return m_alive; }
+	void setActiveState(bool state) { m_alive = state; }
+
 	//Updating and drawing
 
 	void update(float deltaTime);
@@ -60,6 +63,8 @@ public:
 	void allComponentsOff();
 
 protected:
+	bool m_alive = true;
+
 	Matrix3 m_localTransform = Matrix3::identity;
 	Matrix3 m_globalTransform = Matrix3::identity;
 
@@ -80,9 +85,9 @@ public:
 	bool isActive() const { return m_active; }
 	std::string name() const { return m_name; }
 
-	void setActive(bool state) { m_active = state; }
+	void setActiveState(bool state) { m_active = state; }
 
-private:
-	bool m_active = false;
+protected:
+	bool m_active = true;
 	std::string m_name = "0";
 };

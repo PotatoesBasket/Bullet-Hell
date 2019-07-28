@@ -3,6 +3,8 @@
 #include "Sprite.h"
 #include "BoxBoundary.h"
 #include "CircleBoundary.h"
+#include "BulletEmitter.h"
+#include <Input.h>
 
 class Player : public GameObject
 {
@@ -12,7 +14,8 @@ public:
 
 	bool isAlive() const { return m_alive; }
 
-	void checkInputs(float deltaTime);
+	void checkMovement(float deltaTime);
+	void checkFire();
 	void checkCollisions();
 
 	void onUpdate(float deltaTime) override;
@@ -24,8 +27,6 @@ public:
 	float getVelY() { return m_velocity.y; }
 
 private:
-	bool m_alive = false;
-
 	const float m_width = 55;
 	const float m_height = 75;
 	const float m_hurtRadius = 30;
@@ -35,6 +36,12 @@ private:
 	Vector3 m_maxVelocity{ 200, 200, 0 };
 	Vector3 m_acceleration{ 30, 30, 0 };
 
+	aie::Input* m_input = nullptr;
+
+	//Children
+	std::shared_ptr<BulletEmitter> m_emitter;
+
+	//Components
 	std::shared_ptr<Sprite> m_sprite;
 	std::shared_ptr<BoxBoundary> m_boundary;
 	std::shared_ptr<CircleBoundary> m_hurtbox;

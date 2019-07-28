@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "MathLibrary.h"
+#include "BoxBoundary.h"
 #include <Renderer2D.h>
 
 class CircleBoundary : public Component
@@ -14,7 +15,7 @@ public:
 	Vector2 closestPoint(const Vector2& point) const;
 
 	bool isInsideCircle(const Vector2& point) const;
-	//bool overlaps(const BoxBoundary& box) const;
+	bool overlaps(const BoxBoundary& box) const;
 	bool overlaps(const CircleBoundary& other) const;
 
 	void update(GameObject* gameObject, float deltaTime) override; //update position

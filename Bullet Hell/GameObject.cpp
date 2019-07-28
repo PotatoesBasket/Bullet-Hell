@@ -2,28 +2,31 @@
 
 GameObject::~GameObject()
 {
-	if (m_parent != nullptr)
-		m_parent->removeChild(this);
+	if (m_parent) //if object has a parent...
+		m_parent->removeChild(this); //remove object from parent's list of children
 
-	for (auto child : m_children)
-		child->m_parent = nullptr;
+	for (auto& child : m_children) //for all object's children...
+		child->m_parent = nullptr; //remove object from all childrens' parent pointers
 }
 
 //////////////////////////////
 //   Updating and Drawing   //
 //////////////////////////////
 
-/*Calls update on the object itself, then its components, then its children.*/
+/*If object is alive, update the object itself, then its components (if active), then its children.*/
 void GameObject::update(float deltaTime)
 {
-	onUpdate(deltaTime);
+	if (m_alive)
+	{
+		onUpdate(deltaTime);
 
-	for (auto component : m_components)
-		if (component->isActive())
-			component->update(this, deltaTime);
+		for (auto component : m_components)
+			if (component->isActive())
+				component->update(this, deltaTime);
 
-	for (auto child : m_children)
-		child->update(deltaTime);
+		for (auto child : m_children)
+			child->update(deltaTime);
+	}
 }
 
 /*Updates the object's transform taking the parent's transform into account,
@@ -40,17 +43,20 @@ void GameObject::updateTransform()
 		child->updateTransform();
 }
 
-/*Calls draw on the object itself, then its components, then its children.*/
+/*If object is alive, draw the object itself, then its components (if active), then its children.*/
 void GameObject::draw(aie::Renderer2D* renderer)
 {
-	onDraw(renderer);
+	if (m_alive)
+	{
+		onDraw(renderer);
 
-	for (auto component : m_components)
-		if (component->isActive())
-			component->draw(this, renderer);
+		for (auto component : m_components)
+			if (component->isActive())
+				component->draw(this, renderer);
 
-	for (auto child : m_children)
-		child->draw(renderer);
+		for (auto child : m_children)
+			child->draw(renderer);
+	}
 }
 
 ///////////////////
@@ -174,11 +180,11 @@ std::shared_ptr<Component> GameObject::getComponent(std::string name)
 void GameObject::allComponentsOn()
 {
 	for (auto& component : m_components)
-		component->setActive(true);
+		component->setActiveState(true);
 }
 
 void GameObject::allComponentsOff()
 {
 	for (auto& component : m_components)
-		component->setActive(false);
+		component->setActiveState(false);
 }

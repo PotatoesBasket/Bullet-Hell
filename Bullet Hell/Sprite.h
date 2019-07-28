@@ -9,7 +9,7 @@ class Sprite : public Component
 {
 public:
 	Sprite(const char* filename) { load(filename); }
-	Sprite(const char* filename, unsigned int frameCount, float animSpeed);
+	Sprite(const char* filename, unsigned int columnCount, unsigned int rowCount, float animSpeed);
 	~Sprite() {}
 
 	void load(const char* filename);
@@ -21,12 +21,18 @@ public:
 protected:
 	std::shared_ptr<ResourceBase> m_texture = nullptr;
 
-	unsigned int m_frameCount = 1;
-	unsigned int m_currentFrame = 1;
 	float m_animSpeed = 1;
 	float m_timer = 0;
+	unsigned int m_currentCol = 0;
+	unsigned int m_currentRow = 0;
+
+	//spritesheet info
+	unsigned int m_columnCount = 1;
+	unsigned int m_rowCount = 1;
 
 	unsigned int m_sheetWidth = 0;
 	unsigned int m_sheetHeight = 0;
+
 	unsigned int m_spriteWidth = 0;
+	unsigned int m_spriteHeight = 0;
 };

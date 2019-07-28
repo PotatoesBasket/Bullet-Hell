@@ -1,14 +1,15 @@
 #include "Player.h"
 #include "Defines.h"
-#include <Input.h>
 
 Player::Player(const char* texture, Vector2 startPos)
 {
+	m_input = aie::Input::getInstance();
+
 	//Place in world
 	setPosition(startPos);
 
 	//Add components
-	m_sprite = std::make_shared<Sprite>(texture, 2, 0.5f);
+	m_sprite = std::make_shared<Sprite>(texture, 2, 1, 0.5f);
 	addComponent(m_sprite);
 	
 	m_boundary = std::make_shared<BoxBoundary>(
@@ -19,32 +20,36 @@ Player::Player(const char* texture, Vector2 startPos)
 	m_hurtbox = std::make_shared<CircleBoundary>(startPos, m_hurtRadius);
 	addComponent(m_hurtbox);
 
-	//Set player and components to active/alive
-	m_alive = true;
-	allComponentsOn();
+	m_emitter = std::make_shared<BulletEmitter>();
+	addChild(m_emitter.get());
+	m_emitter->setPosition(50, 0);
 }
 
-void Player::checkInputs(float deltaTime)
+void Player::checkMovement(float deltaTime)
 {
-	aie::Input* input = aie::Input::getInstance();
-
-	if (input->isKeyDown(aie::INPUT_KEY_D))
+	if (m_input->isKeyDown(aie::INPUT_KEY_D))
 	{
 		move(Vector2(1, 0) * deltaTime * m_speed);
 	}
-	else if (input->isKeyDown(aie::INPUT_KEY_A))
+	else if (m_input->isKeyDown(aie::INPUT_KEY_A))
 	{
 		move(Vector2(-1, 0) * deltaTime * m_speed);
 	}
 
-	if (input->isKeyDown(aie::INPUT_KEY_W))
+	if (m_input->isKeyDown(aie::INPUT_KEY_W))
 	{
 		move(Vector2(0, 1) * deltaTime * m_speed);
 	}
-	else if (input->isKeyDown(aie::INPUT_KEY_S))
+	else if (m_input->isKeyDown(aie::INPUT_KEY_S))
 	{
 		move(Vector2(0, -1) * deltaTime * m_speed);
 	}
+}
+
+void Player::checkFire()
+{
+	if (m_input->isKeyDown(aie::INPUT_KEY_SPACE))
+		m_emitter.get()->fire();
 }
 
 void Player::checkCollisions()
@@ -61,9 +66,7 @@ void Player::checkCollisions()
 
 void Player::onUpdate(float deltaTime)
 {
-	if (m_alive)
-	{
-		checkInputs(deltaTime);
-		checkCollisions();
-	}
+	checkMovement(deltaTime);
+	checkFire();
+	checkCollisions();
 }

@@ -22,4 +22,6 @@ protected:
 
 	Player* m_player = nullptr;
 	Enemy* m_enemy = nullptr;
+
+	Enemy* m_test = nullptr;
 };

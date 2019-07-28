@@ -1,13 +1,15 @@
 #include "Sprite.h"
 #include "ResourceManager.h"
 
-Sprite::Sprite(const char* filename, unsigned int frameCount, float animSpeed) :
-	m_frameCount(frameCount), m_animSpeed(animSpeed)
+Sprite::Sprite(const char* filename, unsigned int columnCount, unsigned int rowCount,
+	float framesPerSec) : m_columnCount(columnCount), m_rowCount(rowCount), m_animSpeed(framesPerSec)
 {
 	load(filename);
+
 	m_sheetWidth = m_texture->as<aie::Texture>()->getWidth();
 	m_sheetHeight = m_texture->as<aie::Texture>()->getHeight();
-	m_spriteWidth = m_texture->as<aie::Texture>()->getWidth() / frameCount;
+	m_spriteWidth = m_texture->as<aie::Texture>()->getWidth() / columnCount;
+	m_spriteHeight = m_texture->as<aie::Texture>()->getHeight() / rowCount;
 }
 
 void Sprite::load(const char* filename)
@@ -17,16 +19,28 @@ void Sprite::load(const char* filename)
 
 void Sprite::updateUVRect(aie::Renderer2D* renderer)
 {
-	float percent = 1.0f / m_frameCount;
-	renderer->setUVRect(percent * m_currentFrame, 1, percent, 1);
+	//get size of single frame as percentage of total spritesheet
+	float width = 1.0f / m_columnCount;
+	float height = 1.0f / m_rowCount;
 
+	//initialise
+	renderer->setUVRect(width * m_currentCol, height * m_currentRow, width, height);
+
+	//play animation
 	if (m_timer > m_animSpeed)
 	{
-		renderer->setUVRect(percent * m_currentFrame, 1, percent, 1);
-		++m_currentFrame;
+		++m_currentCol;
 
-		if (m_currentFrame > m_frameCount)
-			m_currentFrame = 1;
+		if (m_currentCol == m_columnCount)
+		{
+			++m_currentRow;
+			m_currentCol = 0;
+		}
+
+		if (m_currentRow == m_rowCount)
+			m_currentRow = 0;
+
+		renderer->setUVRect(width * m_currentCol, height * m_currentRow, width, height);
 
 		m_timer = 0;
 	}
@@ -35,6 +49,9 @@ void Sprite::updateUVRect(aie::Renderer2D* renderer)
 void Sprite::draw(GameObject* gameObject, aie::Renderer2D* renderer)
 {
 	updateUVRect(renderer);
-	renderer->drawSpriteTransformed3x3(m_texture->as<aie::Texture>(), gameObject->getGlobalTransformFloat(), m_spriteWidth, m_sheetHeight);
-	renderer->setUVRect(1, 1, 1, 1);
+
+	renderer->drawSpriteTransformed3x3(m_texture->as<aie::Texture>(),
+		gameObject->getGlobalTransformFloat(), m_spriteWidth, m_spriteHeight);
+
+	renderer->setUVRect(1, 1, 1, 1); //reset UV
 }
