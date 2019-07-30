@@ -12,19 +12,13 @@ public:
 	Player(const char* texture, Vector2 startPos);
 	~Player() {}
 
-	bool isAlive() const { return m_alive; }
+	bool isAlive() const { return m_active; }
 
 	void checkMovement(float deltaTime);
 	void checkFire();
 	void checkCollisions();
 
 	void onUpdate(float deltaTime) override;
-
-	//debug stuff
-	float getPosX() { return getGlobalTransform().translation.x; }
-	float getPosY() { return getGlobalTransform().translation.y; }
-	float getVelX() { return m_velocity.x; }
-	float getVelY() { return m_velocity.y; }
 
 private:
 	const float m_width = 55;

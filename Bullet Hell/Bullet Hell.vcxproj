@@ -175,6 +175,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathLibrary.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stats.cpp" />
   </ItemGroup>

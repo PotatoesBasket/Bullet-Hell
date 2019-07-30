@@ -1,6 +1,5 @@
 #pragma once
 #include "ResourceBase.h"
-#include <Font.h>
 #include <memory>
 
 template<class T>

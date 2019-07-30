@@ -17,6 +17,8 @@ bool Game::startup()
 	m_enemy->scale(4, 4);
 	m_test = new Enemy("../bin/textures/placeholder/numbered_grid.tga", Vector2(500, 450), 50, 50, 1.f, 8, 8, 1.f);
 
+	butt = ResourceManager::getInstance().loadFont("../bin/font/consolas.ttf", 32);
+
 	return true;
 }
 
@@ -51,25 +53,7 @@ void Game::draw()
 	m_enemy->draw(m_2dRenderer);
 	m_test->draw(m_2dRenderer);
 
-	char fps[32];
-	sprintf_s(fps, 32, "FPS: %i", getFPS());
-
-	char x[50];
-	sprintf_s(x, 50, "posX: %i", (int)m_player->getPosX());
-	char y[50];
-	sprintf_s(y, 50, "posY: %i", (int)m_player->getPosY());
-	char vx[50];
-	sprintf_s(vx, 50, "velX: %i", (int)m_player->getVelX());
-	char vy[50];
-	sprintf_s(vy, 50, "velY: %i", (int)m_player->getVelY());
-
-	m_2dRenderer->drawText(m_font, fps, 10, 270);
-	m_2dRenderer->drawText(m_font, vy, 10, 220);
-	m_2dRenderer->drawText(m_font, vx, 10, 170);
-	m_2dRenderer->drawText(m_font, y, 10, 120);
-	m_2dRenderer->drawText(m_font, x, 10, 70);
-
-	m_2dRenderer->drawText(m_font, "WASD - move, ESC - quit", 10, 20);
+	m_2dRenderer->drawText(butt->as<aie::Font>(), "WASD - move, ESC - quit", 10, 20);
 
 	m_2dRenderer->end();
 }

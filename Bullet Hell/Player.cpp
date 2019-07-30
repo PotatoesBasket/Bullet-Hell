@@ -20,9 +20,9 @@ Player::Player(const char* texture, Vector2 startPos)
 	m_hurtbox = std::make_shared<CircleBoundary>(startPos, m_hurtRadius);
 	addComponent(m_hurtbox);
 
-	m_emitter = std::make_shared<BulletEmitter>("../bin/textures/placeholder/bullet.png", 0);
+	m_emitter = std::make_shared<BulletEmitter>("../bin/textures/placeholder/bullet.png", 0.25f, 0);
 	addChild(m_emitter.get());
-	m_emitter->setPosition(50, 0);
+	m_emitter->move(50, 0);
 }
 
 void Player::checkMovement(float deltaTime)
@@ -49,7 +49,9 @@ void Player::checkMovement(float deltaTime)
 void Player::checkFire()
 {
 	if (m_input->isKeyDown(aie::INPUT_KEY_SPACE))
+	{
 		m_emitter.get()->fire();
+	}
 }
 
 void Player::checkCollisions()

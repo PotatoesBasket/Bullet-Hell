@@ -14,7 +14,7 @@ Bullet::Bullet(const char* filename, float lifetime, float speed) :
 
 void Bullet::movement(float deltaTime)
 {
-	move(m_speed * deltaTime, 0);
+	move(m_speed * deltaTime, 0); //just goes left to right for now
 }
 
 void Bullet::checkLifetime(float deltaTime)
@@ -24,7 +24,7 @@ void Bullet::checkLifetime(float deltaTime)
 	if (m_timer >= m_lifetime)
 	{
 		m_timer = 0;
-		m_alive = false;
+		m_active = false;
 	}
 }
 

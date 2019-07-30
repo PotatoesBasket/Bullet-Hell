@@ -7,7 +7,7 @@
 class BulletPool : public Component
 {
 public:
-	BulletPool(const char* filename, unsigned int maxCount, float lifetime, float speed);
+	BulletPool(const char* filename, unsigned int maxCount, float lifetime, float speed, float rotation);
 	~BulletPool();
 
 	void activateNext(GameObject* origin);
@@ -17,7 +17,6 @@ public:
 
 private:
 	std::vector<Bullet*> m_bulletList;
-
-	unsigned int m_activeCount = 0;
 	unsigned int m_totalCount = 0;
+	float m_rotation = 0;
 };

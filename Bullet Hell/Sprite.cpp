@@ -14,7 +14,7 @@ Sprite::Sprite(const char* filename, unsigned int columnCount, unsigned int rowC
 
 void Sprite::load(const char* filename)
 {
-	m_texture = ResourceManager::getInstance().get(ResourceManager::TEXTURE, filename);
+	m_texture = ResourceManager::getInstance().loadTexture(filename);
 }
 
 void Sprite::updateUVRect(aie::Renderer2D* renderer)

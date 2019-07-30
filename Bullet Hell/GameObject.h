@@ -13,8 +13,8 @@ public:
 	GameObject() {}
 	virtual ~GameObject();
 
-	bool getActiveState() const { return m_alive; }
-	void setActiveState(bool state) { m_alive = state; }
+	bool isActive() const { return m_active; }
+	void setActiveState(bool state) { m_active = state; }
 
 	//Updating and drawing
 
@@ -63,7 +63,7 @@ public:
 	void allComponentsOff();
 
 protected:
-	bool m_alive = true;
+	bool m_active = true;
 
 	Matrix3 m_localTransform = Matrix3::identity;
 	Matrix3 m_globalTransform = Matrix3::identity;
@@ -83,9 +83,9 @@ public:
 	virtual void draw(GameObject* gameObject, aie::Renderer2D* renderer) = 0;
 	
 	bool isActive() const { return m_active; }
-	std::string name() const { return m_name; }
-
 	void setActiveState(bool state) { m_active = state; }
+
+	std::string name() const { return m_name; }
 
 protected:
 	bool m_active = true;

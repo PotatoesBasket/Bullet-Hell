@@ -7,8 +7,8 @@
 class Game : public aie::Application
 {
 public:
-	Game() {};
-	~Game() {};
+	Game() {}
+	~Game() {}
 
 	bool startup() override;
 	void shutdown() override;
@@ -24,4 +24,6 @@ protected:
 	Enemy* m_enemy = nullptr;
 
 	Enemy* m_test = nullptr;
+
+	std::shared_ptr<ResourceBase> butt = nullptr;
 };

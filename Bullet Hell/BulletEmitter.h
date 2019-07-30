@@ -5,7 +5,7 @@
 class BulletEmitter : public GameObject
 {
 public:
-	BulletEmitter(const char* bulletFilename, float rotation);
+	BulletEmitter(const char* bulletFilename, float shotDelay, float rotation);
 	~BulletEmitter() {}
 
 	void fire();
@@ -17,5 +17,5 @@ private:
 	std::shared_ptr<Sprite> m_test;
 
 	float m_timer = 0;
-	float m_delay = 0.25f;
+	float m_delay = 0;
 };

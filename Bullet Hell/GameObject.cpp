@@ -16,7 +16,7 @@ GameObject::~GameObject()
 /*If object is alive, update the object itself, then its components (if active), then its children.*/
 void GameObject::update(float deltaTime)
 {
-	if (m_alive)
+	if (m_active)
 	{
 		onUpdate(deltaTime);
 
@@ -46,7 +46,7 @@ void GameObject::updateTransform()
 /*If object is alive, draw the object itself, then its components (if active), then its children.*/
 void GameObject::draw(aie::Renderer2D* renderer)
 {
-	if (m_alive)
+	if (m_active)
 	{
 		onDraw(renderer);
 
@@ -163,9 +163,7 @@ void GameObject::removeComponent(const std::shared_ptr<Component>& component)
 		m_components.erase(it);
 }
 
-/*Will return null if component cannot be found. Not really meant
-for components that can have multiples on one GameObject, but if you try,
-it will return the first instance of that component.*/
+/*Should return the first instance of that component.*/
 std::shared_ptr<Component> GameObject::getComponent(std::string name)
 {
 	for (auto component : m_components)
