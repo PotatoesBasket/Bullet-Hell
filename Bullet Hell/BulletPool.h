@@ -4,10 +4,14 @@
 #include <vector>
 #include <memory>
 
+/*
+- Holds a set number of bullet objects of specified type
+*/
+
 class BulletPool : public Component
 {
 public:
-	BulletPool(const char* filename, unsigned int maxCount, float lifetime, float speed, float rotation);
+	BulletPool(BulletType type);
 	~BulletPool();
 
 	void activateNext(GameObject* origin);
@@ -17,6 +21,5 @@ public:
 
 private:
 	std::vector<Bullet*> m_bulletList;
-	unsigned int m_totalCount = 0;
-	float m_rotation = 0;
+	const unsigned int m_totalCount = 100;
 };

@@ -1,114 +1,183 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{d70f8586-0b09-4662-85ad-96c400d80dee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Components">
+      <UniqueIdentifier>{7a6d220f-d115-4b32-afb9-e90f0ea3bfa4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Structure Stuff">
+      <UniqueIdentifier>{2f0a824e-9a48-4bd0-acc7-321e56e49a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{205698e0-52ed-40df-85b9-fa26c22bba82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{8bbac2ad-2d00-4717-b1a0-a1357ff0be65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI Objects">
+      <UniqueIdentifier>{134b2836-60de-4cfc-8119-929017a96eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{bf2e23a5-1eb2-4783-9991-16720d95aba2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BoxBoundary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MathLibrary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleBoundary.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Stats.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletPool.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="BulletEmitter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPool.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleBoundary.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Stats.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Structure Stuff</Filter>
+    </ClCompile>
+    <ClCompile Include="MathLibrary.cpp">
+      <Filter>Structure Stuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Shion.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Structure Stuff</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelBase.cpp">
+      <Filter>Structure Stuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugMenu.cpp">
+      <Filter>UI Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>UI Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>UI Objects</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Defines.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Save.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceBase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxBoundary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MathLibrary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleBoundary.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stats.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="BulletPool.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="BoxBoundary.h">
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="BulletEmitter.h">
-      <Filter>Header Files</Filter>
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPool.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Stats.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleBoundary.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="MathLibrary.h">
+      <Filter>Structure Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Structure Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceBase.h">
+      <Filter>Structure Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_Shion.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Structure Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelBase.h">
+      <Filter>Structure Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FontData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugMenu.h">
+      <Filter>UI Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>UI Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>UI Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="BossData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonData.h">
+      <Filter>Data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

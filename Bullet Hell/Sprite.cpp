@@ -1,20 +1,16 @@
 #include "Sprite.h"
 #include "ResourceManager.h"
 
-Sprite::Sprite(const char* filename, unsigned int columnCount, unsigned int rowCount,
-	float framesPerSec) : m_columnCount(columnCount), m_rowCount(rowCount), m_animSpeed(framesPerSec)
+Sprite::Sprite(SpriteType sprite)
 {
-	load(filename);
+	m_texture = ResourceManager::getInstance().loadTexture(sprite.filename);
+	m_columnCount = sprite.columnCount;
+	m_rowCount = sprite.rowCount;
 
 	m_sheetWidth = m_texture->as<aie::Texture>()->getWidth();
 	m_sheetHeight = m_texture->as<aie::Texture>()->getHeight();
-	m_spriteWidth = m_texture->as<aie::Texture>()->getWidth() / columnCount;
-	m_spriteHeight = m_texture->as<aie::Texture>()->getHeight() / rowCount;
-}
-
-void Sprite::load(const char* filename)
-{
-	m_texture = ResourceManager::getInstance().loadTexture(filename);
+	m_spriteWidth = m_texture->as<aie::Texture>()->getWidth() / m_columnCount;
+	m_spriteHeight = m_texture->as<aie::Texture>()->getHeight() / m_rowCount;
 }
 
 void Sprite::updateUVRect(aie::Renderer2D* renderer)

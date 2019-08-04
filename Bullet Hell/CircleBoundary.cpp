@@ -1,5 +1,11 @@
 #include "CircleBoundary.h"
 
+CircleBoundary::CircleBoundary(const Matrix3& transform, float radius)
+{
+	m_radius = radius;
+	m_center = Vector2(transform.translation.x, transform.translation.y);
+}
+
 /*Returns the point on a circle closest to another point.*/
 Vector2 CircleBoundary::closestPoint(const Vector2& point) const
 {

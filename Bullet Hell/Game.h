@@ -1,8 +1,10 @@
 #pragma once
 #include "Application.h"
 #include "Renderer2D.h"
-#include "Player.h"
-#include "Enemy.h"
+#include "LevelBase.h"
+#include "Boss_Shion.h"
+#include "DebugMenu.h"
+#include "HUD.h"
 
 class Game : public aie::Application
 {
@@ -16,14 +18,24 @@ public:
 	void update(float deltaTime) override;
 	void draw() override;
 
-protected:
+private:
+	enum State
+	{
+		debug_menu,
+		debug_test_lvl_1,
+		splash,
+		title,
+		levelSelect,
+		game
+	};
+
+	State m_state = State::debug_menu;
+
 	aie::Renderer2D* m_2dRenderer = nullptr;
-	aie::Font* m_font = nullptr;
+
+	DebugMenu* m_menu = nullptr;
+	HUD* m_hud = nullptr;
 
 	Player* m_player = nullptr;
-	Enemy* m_enemy = nullptr;
-
-	Enemy* m_test = nullptr;
-
-	std::shared_ptr<ResourceBase> butt = nullptr;
+	Boss_Shion* m_shion = nullptr;
 };

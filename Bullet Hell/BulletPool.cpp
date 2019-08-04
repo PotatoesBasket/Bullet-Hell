@@ -1,13 +1,11 @@
 #include "BulletPool.h"
+#include "BulletData.h"
 
-BulletPool::BulletPool(const char* filename, unsigned int maxCount, float lifetime, float speed, float rotation)
+BulletPool::BulletPool(BulletType type)
 {
-	m_rotation = rotation;
-	m_totalCount = maxCount;
-
-	for (unsigned int i = 0; i < maxCount; ++i)
+	for (unsigned int i = 0; i < m_totalCount; ++i)
 	{
-		Bullet* bullet = new Bullet(filename, lifetime, speed);
+		Bullet* bullet = new Bullet(type);
 		bullet->setActiveState(false);
 		m_bulletList.push_back(bullet);
 	}
@@ -28,10 +26,9 @@ void BulletPool::activateNext(GameObject* origin)
 	{
 		if ((*it)->isActive() == false)
 		{
-			(*it)->setPosition(
-				origin->getGlobalTransform().translation.x,
+			//(*it)->setGlobalTransform(origin->getGlobalTransform());
+			(*it)->setPosition(origin->getGlobalTransform().translation.x,
 				origin->getGlobalTransform().translation.y);
-			(*it)->rotate(m_rotation);
 			(*it)->setActiveState(true);
 			break;
 		}

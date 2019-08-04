@@ -30,8 +30,7 @@ void GameObject::update(float deltaTime)
 }
 
 /*Updates the object's transform taking the parent's transform into account,
-then does the same for its children.
-- Needs to be called within all Transform member functions.*/
+then does the same for its children.*/
 void GameObject::updateTransform()
 {
 	if (m_parent != nullptr)
@@ -62,6 +61,16 @@ void GameObject::draw(aie::Renderer2D* renderer)
 ///////////////////
 //   Transform   //
 ///////////////////
+
+void GameObject::setLocalTransform(const Matrix3& m)
+{
+	m_localTransform = m;
+}
+
+void GameObject::setGlobalTransform(const Matrix3& m)
+{
+	m_globalTransform = m;
+}
 
 void GameObject::setPosition(float x, float y)
 {

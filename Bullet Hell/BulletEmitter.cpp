@@ -1,12 +1,11 @@
 #include "BulletEmitter.h"
 
-BulletEmitter::BulletEmitter(const char* bulletFilename, float shotDelay, float rotation) :
-	m_delay(shotDelay)
+BulletEmitter::BulletEmitter(BulletType type)
 {
-	m_pool = std::make_shared<BulletPool>(bulletFilename, 100, 5.0f, 400.0f, rotation);
+	m_pool = std::make_shared<BulletPool>(type);
 	addComponent(m_pool);
 
-	m_test = std::make_shared<Sprite>("../bin/textures/placeholder/emitter.png");
+	m_test = std::make_shared<Sprite>(SPRITE_EMITTER);
 	addComponent(m_test);
 }
 

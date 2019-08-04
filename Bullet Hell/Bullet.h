@@ -2,11 +2,23 @@
 #include "GameObject.h"
 #include "Sprite.h"
 #include "CircleBoundary.h"
+#include "BulletData.h"
+
+/*
+
+Bullets
+- Contains bullet type data (file name, lifetime, speed)
+  for every type of bullet
+- Bullets are fired from the BulletEmitter object
+- Bullet emitter creates pool of one bullet type on creation
+  so - one emitter per bullet type
+
+*/
 
 class Bullet : public GameObject
 {
 public:
-	Bullet(const char* filename, float lifetime, float speed);
+	Bullet(BulletType type);
 	~Bullet() {};
 
 	void movement(float deltaTime);
@@ -19,7 +31,9 @@ private:
 	std::shared_ptr<Sprite> m_texture;
 	std::shared_ptr<CircleBoundary> m_hitBox;
 
-	float m_speed = 10;
 	float m_timer = 0;
-	float m_lifetime = 0.5f;
+	const int m_lifetime = 100;
+
+	int m_baseSpeed = 20;
+	int m_baseDamage = 1;
 };

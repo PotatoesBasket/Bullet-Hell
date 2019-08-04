@@ -37,10 +37,10 @@ public:
 	operator float* ();
 	operator const float* () const;
 	
-	double distance(const Vector2& other) const;
-	float distanceSqr(const Vector2& other) const;
+	float length(const Vector2& other) const;
+	float lengthSqr(const Vector2& other) const;
 
-	double magnitude() const;
+	float magnitude() const;
 	float magnitudeSqr() const;
 
 	void normalise();
@@ -59,7 +59,7 @@ public:
 			float x, y;
 			union
 			{
-				float z, w;
+				float z, t;
 			};
 		};
 		float data[3];
@@ -92,10 +92,10 @@ public:
 	operator float* ();
 	operator const float* () const;
 	
-	double distance(const Vector3& other) const;
-	float distanceSqr(const Vector3& other) const;
+	float length(const Vector3& other) const;
+	float lengthSqr(const Vector3& other) const;
 
-	double magnitude() const;
+	float magnitude() const;
 	float magnitudeSqr() const;
 
 	void normalise();
@@ -112,7 +112,11 @@ public:
 	{
 		struct
 		{
-			float x, y, z, w;
+			float x, y, z;
+			union
+			{
+				float w, t;
+			};
 		};
 		float data[4];
 	};
@@ -144,10 +148,10 @@ public:
 	operator float* ();
 	operator const float* () const;
 
-	double distance(const Vector4& other) const;
-	float distanceSqr(const Vector4& other) const;
+	float length(const Vector4& other) const;
+	float lengthSqr(const Vector4& other) const;
 
-	double magnitude() const;
+	float magnitude() const;
 	float magnitudeSqr() const;
 
 	void normalise();
@@ -261,6 +265,7 @@ public:
 
 class Matrix4
 {
+public:
 	union
 	{
 		struct

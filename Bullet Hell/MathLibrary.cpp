@@ -1,5 +1,5 @@
-#include <math.h>
 #include "MathLibrary.h"
+#include <math.h>
 
 /////////////////////////////////
 //          Vector 2           //
@@ -55,11 +55,17 @@ Vector2& Vector2::operator *= (float scalar)
 
 Vector2 Vector2::operator / (float scalar) const
 {
+	if (scalar == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	return { x / scalar, y / scalar };
 }
 
 Vector2& Vector2::operator /= (float scalar)
 {
+	if (scalar == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	x /= scalar;
 	y /= scalar;
 	return *this;
@@ -85,12 +91,12 @@ Vector2::operator const float* () const
 	return data;
 }
 
-double Vector2::distance(const Vector2& other) const
+float Vector2::length(const Vector2& other) const
 {
-	return sqrt(distanceSqr(other));
+	return sqrt(lengthSqr(other));
 }
 
-float Vector2::distanceSqr(const Vector2& other) const
+float Vector2::lengthSqr(const Vector2& other) const
 {
 	float dx, dy;
 	dx = x - other.x;
@@ -98,7 +104,7 @@ float Vector2::distanceSqr(const Vector2& other) const
 	return dx * dx + dy * dy;
 }
 
-double Vector2::magnitude() const
+float Vector2::magnitude() const
 {
 	return sqrt(magnitudeSqr());
 }
@@ -108,17 +114,27 @@ float Vector2::magnitudeSqr() const
 	return { x * x + y * y };
 }
 
+/*Normalises the given vector.*/
 void Vector2::normalise()
 {
 	Vector2 vec = *this;
 	float mag = vec.magnitude();
-	vec /= mag;
+
+	if (mag == 0)
+		return; //attempted to divide by zero, do nothing
+
+	*this = vec / mag;
 }
 
+/*Returns a normalised version of the given vector.*/
 Vector2 Vector2::normalised() const
 {
 	Vector2 vec = *this;
 	float mag = vec.magnitude();
+
+	if (mag == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	return vec / mag;
 }
 
@@ -193,11 +209,17 @@ Vector3& Vector3::operator *= (float scalar)
 
 Vector3 Vector3::operator / (float scalar) const
 {
+	if (scalar == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	return { x / scalar, y / scalar, z / scalar };
 }
 
 Vector3& Vector3::operator /= (float scalar)
 {
+	if (scalar == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	x /= scalar;
 	y /= scalar;
 	z /= scalar;
@@ -224,12 +246,12 @@ Vector3::operator const float* () const
 	return data;
 }
 
-double Vector3::distance(const Vector3& other) const
+float Vector3::length(const Vector3& other) const
 {
-	return sqrt(distanceSqr(other));
+	return sqrt(lengthSqr(other));
 }
 
-float Vector3::distanceSqr(const Vector3& other) const
+float Vector3::lengthSqr(const Vector3& other) const
 {
 	float dx, dy, dz;
 	dx = x - other.x;
@@ -238,7 +260,7 @@ float Vector3::distanceSqr(const Vector3& other) const
 	return dx * dx + dy * dy + dz * dz;
 }
 
-double Vector3::magnitude() const
+float Vector3::magnitude() const
 {
 	return sqrt(magnitudeSqr());
 }
@@ -248,17 +270,27 @@ float Vector3::magnitudeSqr() const
 	return { x * x + y * y + z * z };
 }
 
+/*Normalises the given vector.*/
 void Vector3::normalise()
 {
 	Vector3 vec = *this;
 	float mag = vec.magnitude();
-	vec /= mag;
+
+	if (mag == 0)
+		return; //attempted to divide by zero, do nothing
+
+	*this = vec / mag;
 }
 
+/*Returns a normalised version of the given vector.*/
 Vector3 Vector3::normalised() const
 {
 	Vector3 vec = *this;
 	float mag = vec.magnitude();
+
+	if (mag == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	return vec / mag;
 }
 
@@ -267,6 +299,8 @@ float Vector3::dot(const Vector3& other) const
 	return x * other.x + y * other.y + z * other.z;
 }
 
+/*Returns a vector that is perpendicular to two other vectors.
+- Is not normalised, length is the dot product of given vectors.*/
 Vector3 Vector3::cross(const Vector3& other) const
 {
 	return
@@ -348,11 +382,17 @@ Vector4& Vector4::operator *= (float scalar)
 
 Vector4 Vector4::operator / (float scalar) const
 {
+	if (scalar == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	return { x / scalar, y / scalar, z / scalar, w / scalar };
 }
 
 Vector4& Vector4::operator /= (float scalar)
 {
+	if (scalar == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	x /= scalar;
 	y /= scalar;
 	z /= scalar;
@@ -380,12 +420,12 @@ Vector4::operator const float* () const
 	return data;
 }
 
-double Vector4::distance(const Vector4& other) const
+float Vector4::length(const Vector4& other) const
 {
-	return sqrt(distanceSqr(other));
+	return sqrt(lengthSqr(other));
 }
 
-float Vector4::distanceSqr(const Vector4& other) const
+float Vector4::lengthSqr(const Vector4& other) const
 {
 	float dx, dy, dz, dw;
 	dx = x - other.x;
@@ -395,7 +435,7 @@ float Vector4::distanceSqr(const Vector4& other) const
 	return dx * dx + dy * dy + dz * dz + dw * dw;
 }
 
-double Vector4::magnitude() const
+float Vector4::magnitude() const
 {
 	return sqrt(magnitudeSqr());
 }
@@ -405,17 +445,27 @@ float Vector4::magnitudeSqr() const
 	return { x * x + y * y + z * z + w * w };
 }
 
+/*Normalises the given vector.*/
 void Vector4::normalise()
 {
 	Vector4 vec = *this;
 	float mag = vec.magnitude();
-	vec /= mag;
+
+	if (mag == 0)
+		return; //attempted to divide by zero, do nothing
+
+	*this = vec / mag;
 }
 
+/*Returns a normalised version of the given vector.*/
 Vector4 Vector4::normalised() const
 {
 	Vector4 vec = *this;
 	float mag = vec.magnitude();
+
+	if (mag == 0)
+		return *this; //attempted to divide by zero, return original vector
+
 	return vec / mag;
 }
 
@@ -654,9 +704,9 @@ void Matrix3::setRotateX(float radians)
 
 void Matrix3::setRotateY(float radians)
 {
-	xAxis = { cosf(radians), 0, sinf(radians) };
+	xAxis = { cosf(radians), 0, -sinf(radians) };
 	yAxis = { 0, 1, 0 };
-	zAxis = { -sinf(radians), 0, cosf(radians) };
+	zAxis = { sinf(radians), 0, cosf(radians) };
 }
 
 void Matrix3::setRotateZ(float radians)
@@ -843,9 +893,9 @@ void Matrix4::setRotateX(float radians)
 
 void Matrix4::setRotateY(float radians)
 {
-	xAxis = { cosf(radians), 0, sinf(radians), 0 };
+	xAxis = { cosf(radians), 0, -sinf(radians), 0 };
 	yAxis = { 0, 1, 0, 0 };
-	zAxis = { -sinf(radians), 0, cosf(radians), 0 };
+	zAxis = { sinf(radians), 0, cosf(radians), 0 };
 	translation = { 0, 0, 0, 1 };
 }
 

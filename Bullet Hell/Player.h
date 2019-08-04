@@ -9,7 +9,7 @@
 class Player : public GameObject
 {
 public:
-	Player(const char* texture, Vector2 startPos);
+	Player(Vector2 startPos);
 	~Player() {}
 
 	bool isAlive() const { return m_active; }

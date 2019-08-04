@@ -1,13 +1,18 @@
 #pragma once
 #include "GameObject.h"
+#include "BulletData.h"
 #include "BulletPool.h"
 
 class BulletEmitter : public GameObject
 {
 public:
-	BulletEmitter(const char* bulletFilename, float shotDelay, float rotation);
+	BulletEmitter(BulletType type);
 	~BulletEmitter() {}
 
+	/*Set the delay between firing each bullet.*/
+	void setDelay(float delay) { m_delay = delay; }
+	void setTrajectory(float rotation);
+	/*Fire loaded bullet type.*/
 	void fire();
 
 	void onUpdate(float deltaTime) override;

@@ -1,7 +1,8 @@
 #include "Player.h"
-#include "Defines.h"
+#include "BulletData.h"
+#include "ScreenData.h"
 
-Player::Player(const char* texture, Vector2 startPos)
+Player::Player(Vector2 startPos)
 {
 	m_input = aie::Input::getInstance();
 
@@ -9,7 +10,7 @@ Player::Player(const char* texture, Vector2 startPos)
 	setPosition(startPos);
 
 	//Add components
-	m_sprite = std::make_shared<Sprite>(texture, 2, 1, 0.5f);
+	m_sprite = std::make_shared<Sprite>(SPRITE_PLAYER_DEFAULT);
 	addComponent(m_sprite);
 	
 	m_boundary = std::make_shared<BoxBoundary>(
@@ -20,9 +21,10 @@ Player::Player(const char* texture, Vector2 startPos)
 	m_hurtbox = std::make_shared<CircleBoundary>(startPos, m_hurtRadius);
 	addComponent(m_hurtbox);
 
-	m_emitter = std::make_shared<BulletEmitter>("../bin/textures/placeholder/bullet.png", 0.25f, 0);
+	m_emitter = std::make_shared<BulletEmitter>(BULLET_PLAIN);
 	addChild(m_emitter.get());
 	m_emitter->move(50, 0);
+	m_emitter.get()->setDelay(0.3f);
 }
 
 void Player::checkMovement(float deltaTime)

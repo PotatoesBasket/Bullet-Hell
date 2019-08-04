@@ -1,20 +1,21 @@
 #include "Bullet.h"
+#include "SpriteData.h"
 
-Bullet::Bullet(const char* filename, float lifetime, float speed) :
-	m_lifetime(lifetime), m_speed(speed)
+Bullet::Bullet(BulletType type)
 {
-	m_texture = std::make_shared<Sprite>(filename);
+	m_baseSpeed = type.baseSpeed;
+	m_baseDamage = type.baseDamage;
+
+	m_texture = std::make_shared<Sprite>(type.sprite);
 	addComponent(m_texture);
 
-	m_hitBox = std::make_shared<CircleBoundary>
-		(Vector2(this->getLocalTransform().translation.x,
-			this->getLocalTransform().translation.y), 5.0f);
+	m_hitBox = std::make_shared<CircleBoundary>(getLocalTransform(), type.hitRadius);
 	addComponent(m_hitBox);
 }
 
 void Bullet::movement(float deltaTime)
 {
-	move(m_speed * deltaTime, 0); //just goes left to right for now
+	move(m_baseSpeed * deltaTime, 0); //just goes left to right for now
 }
 
 void Bullet::checkLifetime(float deltaTime)

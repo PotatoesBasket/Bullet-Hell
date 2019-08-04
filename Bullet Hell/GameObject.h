@@ -32,6 +32,8 @@ public:
 	float* getLocalTransformFloat() const { return (float*)&m_localTransform; }
 	float* getGlobalTransformFloat() const { return (float*)&m_globalTransform; }
 
+	void setLocalTransform(const Matrix3& m);
+	void setGlobalTransform(const Matrix3& m);
 	void setPosition(float x, float y);
 	void setPosition(const Vector2& v);
 	void setRotation(float radians);

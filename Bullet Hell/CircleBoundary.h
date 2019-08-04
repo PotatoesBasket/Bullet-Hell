@@ -8,6 +8,7 @@ class CircleBoundary : public Component
 {
 public:
 	CircleBoundary(const Vector2& point, float radius) : m_center(point), m_radius(radius) {}
+	CircleBoundary(const Matrix3& transform, float radius);
 	~CircleBoundary() {}
 
 	Vector2 center() const { return m_center; }
