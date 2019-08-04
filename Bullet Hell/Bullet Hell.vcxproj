@@ -172,11 +172,11 @@
     <ClCompile Include="CircleBoundary.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="DebugMenu.cpp" />
+    <ClCompile Include="DebugOverlay.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HUD.cpp" />
-    <ClCompile Include="LevelBase.cpp" />
+    <ClCompile Include="Level_WeaponTest.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MathLibrary.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -185,7 +185,7 @@
     <ClCompile Include="Boss_Shion.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stats.cpp" />
-    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="Font.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BossData.h" />
@@ -198,14 +198,17 @@
     <ClInclude Include="CircleBoundary.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="DebugMenu.h" />
+    <ClInclude Include="DebugOverlay.h" />
     <ClInclude Include="FontData.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="ItemData.h" />
+    <ClInclude Include="Level_WeaponTest.h" />
+    <ClInclude Include="PlayerData.h" />
     <ClInclude Include="ScreenData.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="BulletData.h" />
-    <ClInclude Include="LevelBase.h" />
     <ClInclude Include="MathLibrary.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Resource.h" />
@@ -216,7 +219,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteData.h" />
     <ClInclude Include="Stats.h" />
-    <ClInclude Include="Text.h" />
+    <ClInclude Include="Font.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

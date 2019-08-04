@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Sprite.h"
-#include "Text.h"
+#include "Font.h"
 #include "ButtonData.h"
 #include <Renderer2D.h>
 
@@ -45,9 +45,9 @@ private:
 	bool m_spriteOn = false;
 
 	//Text button
-	std::shared_ptr<Text> m_txtStandard = nullptr;
-	std::shared_ptr<Text> m_txtHover = nullptr;
-	std::shared_ptr<Text> m_txtPress = nullptr;
+	std::shared_ptr<Font> m_txtStandard = nullptr;
+	std::shared_ptr<Font> m_txtHover = nullptr;
+	std::shared_ptr<Font> m_txtPress = nullptr;
 	
 	//Sprite button
 	std::shared_ptr<Sprite> m_sprStandard = nullptr;

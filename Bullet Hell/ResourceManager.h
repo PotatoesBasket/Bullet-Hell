@@ -12,13 +12,13 @@ private:
 	ResourceManager& operator=(const ResourceManager&) {}
 
 public:
+	~ResourceManager() {}
+
 	static ResourceManager& getInstance()
 	{
 		static ResourceManager instance;
 		return instance;
 	}
-
-	~ResourceManager() {}
 
 	size_t getCount() const { return m_resources.size(); }
 

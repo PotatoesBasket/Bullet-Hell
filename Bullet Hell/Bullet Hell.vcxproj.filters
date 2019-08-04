@@ -7,9 +7,6 @@
     <Filter Include="Components">
       <UniqueIdentifier>{7a6d220f-d115-4b32-afb9-e90f0ea3bfa4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Structure Stuff">
-      <UniqueIdentifier>{2f0a824e-9a48-4bd0-acc7-321e56e49a11}</UniqueIdentifier>
-    </Filter>
     <Filter Include="States">
       <UniqueIdentifier>{205698e0-52ed-40df-85b9-fa26c22bba82}</UniqueIdentifier>
     </Filter>
@@ -21,6 +18,12 @@
     </Filter>
     <Filter Include="Managers">
       <UniqueIdentifier>{bf2e23a5-1eb2-4783-9991-16720d95aba2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="App">
+      <UniqueIdentifier>{5ab8f514-022c-4a1e-bc47-3a6b3e7347b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{2f0a824e-9a48-4bd0-acc7-321e56e49a11}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -48,14 +51,8 @@
     <ClCompile Include="Stats.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Structure Stuff</Filter>
-    </ClCompile>
     <ClCompile Include="MathLibrary.cpp">
-      <Filter>Structure Stuff</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>States</Filter>
+      <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Objects</Filter>
@@ -67,13 +64,7 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
-      <Filter>Structure Stuff</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelBase.cpp">
-      <Filter>Structure Stuff</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>Components</Filter>
+      <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="DebugMenu.cpp">
       <Filter>UI Objects</Filter>
@@ -87,8 +78,20 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Managers</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugOverlay.cpp">
+      <Filter>UI Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Level_WeaponTest.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,16 +123,7 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="MathLibrary.h">
-      <Filter>Structure Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Structure Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceBase.h">
-      <Filter>Structure Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>States</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>Objects</Filter>
@@ -138,7 +132,7 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
-      <Filter>Structure Stuff</Filter>
+      <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="BulletData.h">
       <Filter>Data</Filter>
@@ -148,12 +142,6 @@
     </ClInclude>
     <ClInclude Include="SpriteData.h">
       <Filter>Data</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelBase.h">
-      <Filter>Structure Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="FontData.h">
       <Filter>Data</Filter>
@@ -178,6 +166,30 @@
     </ClInclude>
     <ClInclude Include="ButtonData.h">
       <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemData.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceBase.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugOverlay.h">
+      <Filter>UI Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Level_WeaponTest.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

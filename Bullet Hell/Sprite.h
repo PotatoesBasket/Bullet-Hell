@@ -31,6 +31,6 @@ protected:
 	unsigned int m_sheetWidth = 0;
 	unsigned int m_sheetHeight = 0;
 
-	float m_spriteWidth = 0;
-	float m_spriteHeight = 0;
+	unsigned int m_spriteWidth = 0;
+	unsigned int m_spriteHeight = 0;
 };

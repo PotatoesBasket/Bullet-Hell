@@ -1,5 +1,6 @@
 #pragma once
 #include "Button.h"
+#include "GameManager.h"
 #include <Input.h>
 
 class DebugMenu : public GameObject
@@ -20,6 +21,8 @@ public:
 
 private:
 	aie::Input* m_input = nullptr;
+	GameManager& m_manager = GameManager::getInstance();
+
 	float m_inputDelay = 0.3f;
 	float m_inputTimer = 0.0f;
 

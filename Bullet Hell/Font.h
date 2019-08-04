@@ -3,11 +3,11 @@
 #include "FontData.h"
 #include "ResourceManager.h"
 
-class Text : public Component
+class Font : public Component
 {
 public:
-	Text(FontType font, const char* text);
-	~Text() {}
+	Font(FontType font, const char* text);
+	~Font() {}
 
 	void updateText(const char* text) { m_text = text; }
 	/*Empty*/

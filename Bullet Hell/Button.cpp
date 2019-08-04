@@ -20,9 +20,9 @@ void Button::initText(TextButton button, const char* text)
 {
 	m_textOn = true;
 
-	m_txtStandard = std::make_shared<Text>(button.standard, text);
-	m_txtHover = std::make_shared<Text>(button.hover, text);
-	m_txtPress = std::make_shared<Text>(button.press, text);
+	m_txtStandard = std::make_shared<Font>(button.standard, text);
+	m_txtHover = std::make_shared<Font>(button.hover, text);
+	m_txtPress = std::make_shared<Font>(button.press, text);
 
 	addComponent(m_txtStandard);
 	addComponent(m_txtHover);

@@ -30,13 +30,16 @@ void Game::shutdown()
 void Game::update(float deltaTime)
 {
 	aie::Input* input = aie::Input::getInstance();
+	GameManager& manager = GameManager::getInstance();
 
-	switch (m_state)
+	switch (manager.getGameState())
 	{
-	case debug_menu:
+	case GameManager::debug_menu:
 		m_menu->update(deltaTime);
 		break;
-	case game:
+	case GameManager::debug_weapontest:
+		break;
+	case GameManager::game:
 		m_hud->update(deltaTime);
 		m_player->update(deltaTime);
 		m_shion->update(deltaTime);
@@ -50,15 +53,18 @@ void Game::update(float deltaTime)
 void Game::draw()
 {
 	clearScreen();
+	GameManager& manager = GameManager::getInstance();
 
 	m_2dRenderer->begin();
 
-	switch (m_state)
+	switch (manager.getGameState())
 	{
-	case debug_menu:
+	case GameManager::debug_menu:
 		m_menu->draw(m_2dRenderer);
 		break;
-	case game:
+	case GameManager::debug_weapontest:
+		break;
+	case GameManager::game:
 		m_hud->draw(m_2dRenderer);
 		m_player->draw(m_2dRenderer);
 		m_shion->draw(m_2dRenderer);

@@ -2,7 +2,15 @@
 
 struct SpriteType
 {
-	const char* filename;
+	SpriteType& operator=(const SpriteType& other)
+	{
+		filename = other.filename;
+		columnCount = other.columnCount;
+		rowCount = other.rowCount;
+		return *this;
+	}
+
+	char* filename;
 	int columnCount;
 	int rowCount;
 };

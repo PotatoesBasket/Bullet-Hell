@@ -49,6 +49,7 @@ void DebugMenu::checkInput()
 		{
 		case onStart:
 			m_buttonStart->setState(Button::press);
+			m_manager.setGameState(GameManager::game);
 			break;
 		case onExit:
 			m_buttonExit->setState(Button::press);

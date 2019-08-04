@@ -1,10 +1,8 @@
 #include "Bullet.h"
-#include "SpriteData.h"
 
 Bullet::Bullet(BulletType type)
 {
-	m_baseSpeed = type.baseSpeed;
-	m_baseDamage = type.baseDamage;
+	m_type = type;
 
 	m_texture = std::make_shared<Sprite>(type.sprite);
 	addComponent(m_texture);
@@ -15,7 +13,7 @@ Bullet::Bullet(BulletType type)
 
 void Bullet::movement(float deltaTime)
 {
-	move(m_baseSpeed * deltaTime, 0); //just goes left to right for now
+	move(m_type.baseSpeed * deltaTime, 0); //just goes left to right for now
 }
 
 void Bullet::checkLifetime(float deltaTime)

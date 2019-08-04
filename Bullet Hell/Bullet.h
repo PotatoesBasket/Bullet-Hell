@@ -28,12 +28,11 @@ public:
 	void onUpdate(float deltaTime) override;
 
 private:
+	BulletType m_type = BULLET_PLAIN;
+
 	std::shared_ptr<Sprite> m_texture;
 	std::shared_ptr<CircleBoundary> m_hitBox;
 
 	float m_timer = 0;
-	const int m_lifetime = 100;
-
-	int m_baseSpeed = 20;
-	int m_baseDamage = 1;
+	float m_lifetime = 6;
 };
