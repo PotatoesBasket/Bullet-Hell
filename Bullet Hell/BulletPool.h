@@ -11,7 +11,7 @@
 class BulletPool : public Component
 {
 public:
-	BulletPool(BulletType type);
+	BulletPool(BulletType type, bool playerOwned);
 	~BulletPool();
 
 	void activateNext(GameObject* origin);

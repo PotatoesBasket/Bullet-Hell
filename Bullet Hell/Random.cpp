@@ -1,6 +1,11 @@
 #include "Random.h"
 #include <math.h>
 
+Random::Random(unsigned int seed) : m_intParams(0, INT_MAX), m_floatParams(0.0f, 1.0f)
+{
+	setSeed(seed);
+}
+
 int Random::nextInt()
 {
 	return m_intDistribution(m_engine);

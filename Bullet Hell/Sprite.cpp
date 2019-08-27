@@ -6,6 +6,7 @@ Sprite::Sprite(SpriteType sprite)
 	m_texture = ResourceManager::getInstance().loadTexture(sprite.filename);
 	m_columnCount = sprite.columnCount;
 	m_rowCount = sprite.rowCount;
+	m_animSpeed = sprite.animSpeed;
 
 	m_sheetWidth = m_texture->as<aie::Texture>()->getWidth();
 	m_sheetHeight = m_texture->as<aie::Texture>()->getHeight();

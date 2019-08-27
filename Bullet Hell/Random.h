@@ -5,10 +5,11 @@ class Random
 {
 public:
 	Random() : m_intParams(0, INT_MAX), m_floatParams(0.0f, 1.0f) {}
+	Random(unsigned int seed);
 	~Random() {}
 
 	/*Set custom seed*/
-	void seed(unsigned int value) { m_engine.seed(value); }
+	void setSeed(unsigned int value) { m_engine.seed(value); }
 
 	/*Returns a random int within a predetermined range (default range is 0 - INT_MAX)*/
 	int nextInt();

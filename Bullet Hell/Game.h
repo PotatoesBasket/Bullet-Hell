@@ -2,10 +2,8 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "GameManager.h"
-#include "LevelBase.h"
-#include "Boss_Shion.h"
-#include "DebugMenu.h"
-#include "HUD.h"
+#include "TitleScreen.h"
+#include "Level_WeaponTest.h"
 
 class Game : public aie::Application
 {
@@ -21,10 +19,10 @@ public:
 
 private:
 	aie::Renderer2D* m_2dRenderer = nullptr;
+	aie::Input* m_input = nullptr;
+	GameManager& m_manager = GameManager::getInstance();
 
-	DebugMenu* m_menu = nullptr;
-	HUD* m_hud = nullptr;
-
-	Player* m_player = nullptr;
-	Boss_Shion* m_shion = nullptr;
+	//states
+	TitleScreen* m_menu = nullptr;
+	Level_WeaponTest* m_lvl1 = nullptr;
 };

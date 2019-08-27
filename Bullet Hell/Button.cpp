@@ -20,15 +20,17 @@ void Button::initText(TextButton button, const char* text)
 {
 	m_textOn = true;
 
-	m_txtStandard = std::make_shared<Font>(button.standard, text);
-	m_txtHover = std::make_shared<Font>(button.hover, text);
-	m_txtPress = std::make_shared<Font>(button.press, text);
+	m_txtStandard = std::make_shared<Text>(button.standard, text);
+	m_txtHover = std::make_shared<Text>(button.hover, text);
+	m_txtPress = std::make_shared<Text>(button.press, text);
 
-	addComponent(m_txtStandard);
-	addComponent(m_txtHover);
-	addComponent(m_txtPress);
+	addChild(m_txtStandard.get());
+	addChild(m_txtHover.get());
+	addChild(m_txtPress.get());
 
-	allComponentsOff();
+	m_txtStandard->setActiveState(false);
+	m_txtHover->setActiveState(false);
+	m_txtPress->setActiveState(false);
 }
 
 void Button::initSprite(SpriteButton button)
@@ -56,21 +58,21 @@ void Button::setState(State state)
 		switch (m_state)
 		{
 		case standard:
-			m_txtStandard.get()->setActiveState(true);
-			m_txtHover.get()->setActiveState(false);
-			m_txtPress.get()->setActiveState(false);
+			m_txtStandard->setActiveState(true);
+			m_txtHover->setActiveState(false);
+			m_txtPress->setActiveState(false);
 			break;
 
 		case hover:
-			m_txtStandard.get()->setActiveState(false);
-			m_txtHover.get()->setActiveState(true);
-			m_txtPress.get()->setActiveState(false);
+			m_txtStandard->setActiveState(false);
+			m_txtHover->setActiveState(true);
+			m_txtPress->setActiveState(false);
 			break;
 
 		case press:
-			m_txtStandard.get()->setActiveState(false);
-			m_txtHover.get()->setActiveState(false);
-			m_txtPress.get()->setActiveState(true);
+			m_txtStandard->setActiveState(false);
+			m_txtHover->setActiveState(false);
+			m_txtPress->setActiveState(true);
 			break;
 		}
 	}
@@ -81,21 +83,21 @@ void Button::setState(State state)
 		switch (m_state)
 		{
 		case standard:
-			m_sprStandard.get()->setActiveState(true);
-			m_sprHover.get()->setActiveState(false);
-			m_sprPress.get()->setActiveState(false);
+			m_sprStandard->setActiveState(true);
+			m_sprHover->setActiveState(false);
+			m_sprPress->setActiveState(false);
 			break;
 
 		case hover:
-			m_sprStandard.get()->setActiveState(false);
-			m_sprHover.get()->setActiveState(true);
-			m_sprPress.get()->setActiveState(false);
+			m_sprStandard->setActiveState(false);
+			m_sprHover->setActiveState(true);
+			m_sprPress->setActiveState(false);
 			break;
 
 		case press:
-			m_sprStandard.get()->setActiveState(false);
-			m_sprHover.get()->setActiveState(false);
-			m_sprPress.get()->setActiveState(true);
+			m_sprStandard->setActiveState(false);
+			m_sprHover->setActiveState(false);
+			m_sprPress->setActiveState(true);
 			break;
 		}
 	}

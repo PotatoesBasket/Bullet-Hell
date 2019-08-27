@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "ScreenData.h"
+#include "GameManager.h"
+#include <iostream>
 
 Player::Player(const Vector2& startPos)
 {
@@ -10,11 +12,17 @@ Player::Player(const Vector2& startPos)
 Player::Player(const Vector2& startPos, BulletType type1, BulletType type2,
 	ItemType item1, ItemType item2, ItemType item3, ItemType item4) :
 	m_shot1(type1), m_shot2(type2), m_item1(item1), m_item2(item2),
-	m_item3(item3), m_item4(item4) { initialise(startPos); }
+	m_item3(item3), m_item4(item4)
+{
+	initialise(startPos);
+}
 
 void Player::initialise(const Vector2& startPos)
 {
+	m_health = 100;
+
 	m_input = aie::Input::getInstance();
+	GameManager::getInstance().setPlayer(this);
 
 	//Place in world
 	setPosition(startPos);
@@ -28,18 +36,21 @@ void Player::initialise(const Vector2& startPos)
 		startPos + Vector2(m_width * 0.5f, m_height * 0.5f));
 	addComponent(m_boundary);
 
-	m_hurtbox = std::make_shared<CircleBoundary>(startPos, m_hurtRadius);
-	addComponent(m_hurtbox);
+	m_hurtBox = std::make_shared<CircleBoundary>(startPos, m_hurtRadius);
+	addComponent(m_hurtBox);
 
-	m_emitter1 = std::make_shared<BulletEmitter>(m_shot1);
+	m_emitter1 = std::make_shared<BulletEmitter>(m_shot1, true);
 	addChild(m_emitter1.get());
 	m_emitter1->move(50, 0);
-	m_emitter1.get()->setDelay(m_shot1.shotDelay);
 
-	m_emitter2 = std::make_shared<BulletEmitter>(m_shot2);
+	m_emitter2 = std::make_shared<BulletEmitter>(m_shot2, true);
 	addChild(m_emitter2.get());
 	m_emitter2->move(50, 0);
-	m_emitter2.get()->setDelay(m_shot2.shotDelay);
+}
+
+Player::~Player()
+{
+	GameManager::getInstance().removePlayer();
 }
 
 void Player::checkMovement(float deltaTime)
@@ -63,38 +74,32 @@ void Player::checkMovement(float deltaTime)
 	}
 }
 
-void Player::checkFire()
+void Player::checkCollision()
 {
-	if (m_input->isKeyDown(aie::INPUT_KEY_SPACE))
+	GameManager& manager = GameManager::getInstance();
+
+	if (manager.getBoss() != nullptr)
 	{
-		if (m_shotToggle == 0)
+		if (manager.getBoss()->isActive() && m_hurtBox->overlaps(manager.getBoss()->getHurtBox()))
 		{
-			m_emitter1.get()->fire();
-			m_shotToggle = 1;
-		}
-		else
-		{
-			m_emitter2.get()->fire();
-			m_shotToggle = 0;
+			setActiveState(false);
+			manager.removePlayer();
 		}
 	}
 }
 
-void Player::checkCollisions()
+void Player::checkFire()
 {
-	if (m_localTransform.translation.x < 0 + m_boundary.get()->width() * 0.5f)
-		m_localTransform.translation.x = 0 + m_boundary.get()->width() * 0.5f;
-	if (m_localTransform.translation.x > SCR_WIDTH - m_boundary.get()->width() * 0.5f)
-		m_localTransform.translation.x = SCR_WIDTH - m_boundary.get()->width() * 0.5f;
-	if (m_localTransform.translation.y < 0 + m_boundary.get()->height() * 0.5f)
-		m_localTransform.translation.y = 0 + m_boundary.get()->height() * 0.5f;
-	if (m_localTransform.translation.y > SCR_HEIGHT - m_boundary.get()->height() * 0.5f)
-		m_localTransform.translation.y = SCR_HEIGHT - m_boundary.get()->height() * 0.5f;
+	if (m_input->isKeyDown(aie::INPUT_KEY_SPACE))
+	{
+		m_emitter1->fire();
+		m_emitter2->fire();
+	}
 }
 
-void Player::onUpdate(float deltaTime)
+void Player::characterUpdate(float deltaTime)
 {
 	checkMovement(deltaTime);
+	checkCollision();
 	checkFire();
-	checkCollisions();
 }

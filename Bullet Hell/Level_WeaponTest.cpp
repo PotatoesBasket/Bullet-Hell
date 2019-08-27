@@ -1,32 +1,42 @@
 #include "Level_WeaponTest.h"
-#include "Boss_Shion.h"
+#include "ScreenData.h"
+#include "GameManager.h"
+#include <iostream>
 
 Level_WeaponTest::Level_WeaponTest()
 {
-	m_hud = new HUD();
-	m_player = new Player(Vector2(300, 500));
-	m_shion = new Boss_Shion(Vector2(800, 500));
+	m_rose = new Decoration(SPRITE_ROSEBLOSSOM, Vector2(1200, 70));
+	m_rose->rotate(0.9f);
+	m_rose->scale(0.7f);
+	addChild(m_rose);
 
-	m_hud->setIntruction("testing instruction poop poop");
+	m_hud = new HUD();
+	m_player = new Player(Vector2(300, SCR_HALFHEIGHT));
+	m_boss = new Boss(Vector2(1000, 250), SPRITE_BOSS_1, BOSS_SHION);
+
+	addChild(m_hud);
+	addChild(m_player);
+	addChild(m_boss);
+
+	m_hud->setIntructionText("move - wasd, shoot - space, exit - esc");
+	m_hud->setTimerText(std::to_string(420).c_str());
+	m_hud->setPointsText(std::to_string(420).c_str());
 }
 
 Level_WeaponTest::~Level_WeaponTest()
 {
-	delete m_shion;
+	delete m_boss;
 	delete m_player;
 	delete m_hud;
 }
 
-void Level_WeaponTest::update(float deltaTime)
+void Level_WeaponTest::onUpdate(float deltaTime)
 {
-	m_shion->update(deltaTime);
-	m_player->update(deltaTime);
-	m_hud->update(deltaTime);
-}
+	GameManager& manager = GameManager::getInstance();
 
-void Level_WeaponTest::draw(aie::Renderer2D* renderer)
-{
-	m_shion->draw(renderer);
-	m_player->draw(renderer);
-	m_hud->draw(renderer);
+	m_timer += deltaTime;
+	
+	m_hud->setIntructionText("testy test");
+	//m_hud->setTimerText(std::to_string(m_timer).c_str());
+	//m_hud->setPointsText(std::to_string(manager.getPoints()).c_str());
 }

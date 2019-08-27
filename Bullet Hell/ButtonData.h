@@ -16,10 +16,10 @@ struct SpriteButton
 	SpriteType press;
 };
 
-const TextButton BUTTON_TEXTTEST = {
-	FONT_DEBUG_WHT,
-	FONT_DEBUG_MAG,
-	FONT_DEBUG_YLW
+const TextButton BUTTON_TITLESCR = {
+	FONT_MENU_GRY,
+	FONT_MENU_WHT,
+	FONT_MENU_YLW
 };
 
 const SpriteButton BUTTON_SPRITETEST = {

@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Font.h"
+#include "Text.h"
 #include "FontData.h"
 
 class HUD : public GameObject
@@ -9,13 +9,12 @@ public:
 	HUD();
 	~HUD() {}
 
-	void setIntruction(const char* text);
-	void setTimer(const char* text);
+	void setIntructionText(const char* text);
+	void setTimerText(const char* text);
+	void setPointsText(const char* text);
 
 private:
-	std::shared_ptr<Font> m_infoText = nullptr;
-	std::shared_ptr<Font> m_timerText = nullptr;
-
-	char* m_infoContent = "invalid information text";
-	char* m_timerContent = "00:00";
+	std::shared_ptr<Text> m_infoText = nullptr;
+	std::shared_ptr<Text> m_timerText = nullptr;
+	std::shared_ptr<Text> m_pointsText = nullptr;
 };

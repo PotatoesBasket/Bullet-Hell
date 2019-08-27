@@ -14,7 +14,7 @@ public:
 	virtual ~GameObject();
 
 	bool isActive() const { return m_active; }
-	void setActiveState(bool state) { m_active = state; }
+	void setActiveState(bool state);
 
 	//Updating and drawing
 
@@ -59,7 +59,6 @@ public:
 
 	void addComponent(const std::shared_ptr<Component>& component);
 	void removeComponent(const std::shared_ptr<Component>& component);
-	std::shared_ptr<Component> getComponent(std::string name);
 
 	void allComponentsOn();
 	void allComponentsOff();
@@ -87,9 +86,6 @@ public:
 	bool isActive() const { return m_active; }
 	void setActiveState(bool state) { m_active = state; }
 
-	std::string name() const { return m_name; }
-
 protected:
 	bool m_active = true;
-	std::string m_name = "0";
 };

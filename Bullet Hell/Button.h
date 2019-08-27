@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Sprite.h"
-#include "Font.h"
+#include "Text.h"
 #include "ButtonData.h"
 #include <Renderer2D.h>
 
@@ -39,15 +39,17 @@ public:
 	//Sets active/inactive correct components based on button state
 	void setState(State state);
 
+	float getTextHalfWidth() { return m_txtStandard->getHalfWidth(); }
+
 private:
 	State m_state = standard;
 	bool m_textOn = false;
 	bool m_spriteOn = false;
 
 	//Text button
-	std::shared_ptr<Font> m_txtStandard = nullptr;
-	std::shared_ptr<Font> m_txtHover = nullptr;
-	std::shared_ptr<Font> m_txtPress = nullptr;
+	std::shared_ptr<Text> m_txtStandard = nullptr;
+	std::shared_ptr<Text> m_txtHover = nullptr;
+	std::shared_ptr<Text> m_txtPress = nullptr;
 	
 	//Sprite button
 	std::shared_ptr<Sprite> m_sprStandard = nullptr;

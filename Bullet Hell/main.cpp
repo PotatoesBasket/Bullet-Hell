@@ -1,8 +1,8 @@
 #include "Game.h"
 #include "ScreenData.h"
 
-int main() {
-	
+int main()
+{	
 	// allocation
 	auto app = new Game();
 

@@ -8,66 +8,49 @@
 bool Game::startup()
 {
 	m_2dRenderer = new aie::Renderer2D();
+	m_input = aie::Input::getInstance();
 
-	m_menu = new DebugMenu();
-	m_hud = new HUD();
-
-	m_player = new Player(Vector2(300, 350));
-	m_shion = new Boss_Shion(Vector2(600, 400));
+	m_menu = new TitleScreen();
+	m_lvl1 = new Level_WeaponTest();
 
 	return true;
 }
 
 void Game::shutdown()
 {
-	delete m_shion;
-	delete m_player;
-	delete m_hud;
+	delete m_lvl1;
 	delete m_menu;
 	delete m_2dRenderer;
 }
 
 void Game::update(float deltaTime)
 {
-	aie::Input* input = aie::Input::getInstance();
-	GameManager& manager = GameManager::getInstance();
-
-	switch (manager.getGameState())
+	switch (m_manager.getGameState())
 	{
-	case GameManager::debug_menu:
+	case GameManager::titleScreen:
 		m_menu->update(deltaTime);
 		break;
 	case GameManager::debug_weapontest:
-		break;
-	case GameManager::game:
-		m_hud->update(deltaTime);
-		m_player->update(deltaTime);
-		m_shion->update(deltaTime);
+		m_lvl1->update(deltaTime);
 		break;
 	}
 
-	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
+	if (m_input->isKeyDown(aie::INPUT_KEY_ESCAPE) || !m_manager.checkPlaying())
 		quit();
 }
 
 void Game::draw()
 {
 	clearScreen();
-	GameManager& manager = GameManager::getInstance();
-
 	m_2dRenderer->begin();
 
-	switch (manager.getGameState())
+	switch (m_manager.getGameState())
 	{
-	case GameManager::debug_menu:
+	case GameManager::titleScreen:
 		m_menu->draw(m_2dRenderer);
 		break;
 	case GameManager::debug_weapontest:
-		break;
-	case GameManager::game:
-		m_hud->draw(m_2dRenderer);
-		m_player->draw(m_2dRenderer);
-		m_shion->draw(m_2dRenderer);
+		m_lvl1->draw(m_2dRenderer);
 		break;
 	}
 

@@ -1,8 +1,11 @@
 #include "BulletEmitter.h"
+#include <iostream>
 
-BulletEmitter::BulletEmitter(BulletType type)
+BulletEmitter::BulletEmitter(BulletType type, bool playerOwned)
 {
-	m_pool = std::make_shared<BulletPool>(type);
+	m_delay = type.shotDelay;
+
+	m_pool = std::make_shared<BulletPool>(type, playerOwned);
 	addComponent(m_pool);
 
 	m_test = std::make_shared<Sprite>(SPRITE_EMITTER);

@@ -9,6 +9,20 @@ GameObject::~GameObject()
 		child->m_parent = nullptr; //remove object from all childrens' parent pointers
 }
 
+void GameObject::setActiveState(bool state)
+{
+	m_active = state;
+
+	if (m_active == true)
+	{
+		allComponentsOn();
+	}
+	else
+	{
+		allComponentsOff();
+	}
+}
+
 //////////////////////////////
 //   Updating and Drawing   //
 //////////////////////////////
@@ -170,18 +184,6 @@ void GameObject::removeComponent(const std::shared_ptr<Component>& component)
 
 	if (it != m_components.end())
 		m_components.erase(it);
-}
-
-/*Should return the first instance of that component.*/
-std::shared_ptr<Component> GameObject::getComponent(std::string name)
-{
-	for (auto component : m_components)
-	{
-		if (component->name() == name)
-			return component;
-	}
-	
-	return nullptr;
 }
 
 void GameObject::allComponentsOn()

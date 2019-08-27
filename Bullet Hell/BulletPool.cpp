@@ -1,11 +1,11 @@
 #include "BulletPool.h"
 #include "BulletData.h"
 
-BulletPool::BulletPool(BulletType type)
+BulletPool::BulletPool(BulletType type, bool playerOwned)
 {
 	for (unsigned int i = 0; i < m_totalCount; ++i)
 	{
-		Bullet* bullet = new Bullet(type);
+		Bullet* bullet = new Bullet(type, playerOwned);
 		bullet->setActiveState(false);
 		m_bulletList.push_back(bullet);
 	}
@@ -29,6 +29,7 @@ void BulletPool::activateNext(GameObject* origin)
 			//(*it)->setGlobalTransform(origin->getGlobalTransform());
 			(*it)->setPosition(origin->getGlobalTransform().translation.x,
 				origin->getGlobalTransform().translation.y);
+			(*it)->getHitBox()->earlyUpdatePosition(origin);
 			(*it)->setActiveState(true);
 			break;
 		}

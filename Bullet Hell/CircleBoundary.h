@@ -16,9 +16,10 @@ public:
 	Vector2 closestPoint(const Vector2& point) const;
 
 	bool isInsideCircle(const Vector2& point) const;
-	bool overlaps(const BoxBoundary& box) const;
-	bool overlaps(const CircleBoundary& other) const;
+	bool overlaps(std::shared_ptr<CircleBoundary> other) const;
+	bool overlaps(std::shared_ptr<BoxBoundary> box) const;
 
+	void earlyUpdatePosition(GameObject* gameObject); //for that one time with the bullets
 	void update(GameObject* gameObject, float deltaTime) override; //update position
 	void draw(GameObject* gameObject, aie::Renderer2D* renderer) override; //debug only
 

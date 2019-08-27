@@ -169,10 +169,10 @@
     <ClCompile Include="BulletEmitter.cpp" />
     <ClCompile Include="BulletPool.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="CircleBoundary.cpp" />
     <ClCompile Include="Boss.cpp" />
-    <ClCompile Include="DebugMenu.cpp" />
-    <ClCompile Include="DebugOverlay.cpp" />
+    <ClCompile Include="TitleScreen.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="HUD.cpp" />
@@ -182,10 +182,9 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
-    <ClCompile Include="Boss_Shion.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stats.cpp" />
-    <ClCompile Include="Font.cpp" />
+    <ClCompile Include="Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BossData.h" />
@@ -195,10 +194,11 @@
     <ClInclude Include="BulletPool.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonData.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="CircleBoundary.h" />
     <ClInclude Include="Boss.h" />
-    <ClInclude Include="DebugMenu.h" />
-    <ClInclude Include="DebugOverlay.h" />
+    <ClInclude Include="TitleScreen.h" />
+    <ClInclude Include="Decoration.h" />
     <ClInclude Include="FontData.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameManager.h" />
@@ -215,11 +215,10 @@
     <ClInclude Include="ResourceBase.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Boss_Shion.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteData.h" />
     <ClInclude Include="Stats.h" />
-    <ClInclude Include="Font.h" />
+    <ClInclude Include="Text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

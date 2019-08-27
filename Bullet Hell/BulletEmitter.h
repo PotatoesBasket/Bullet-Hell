@@ -6,12 +6,12 @@
 class BulletEmitter : public GameObject
 {
 public:
-	BulletEmitter(BulletType type);
+	BulletEmitter(BulletType type, bool playerOwned);
 	~BulletEmitter() {}
 
 	/*Set the delay between firing each bullet.*/
 	void setDelay(float delay) { m_delay = delay; }
-	void setTrajectory(float rotation);
+
 	/*Fire loaded bullet type.*/
 	void fire();
 
