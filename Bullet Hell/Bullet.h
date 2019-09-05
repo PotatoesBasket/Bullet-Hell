@@ -30,7 +30,6 @@ public:
 
 	std::shared_ptr<CircleBoundary> getHitBox() { return m_hitBox; }
 
-	/*unfinished*/
 	void movement(float deltaTime);
 
 	/*Deactivates bullet if it sticks around too long

@@ -1,5 +1,9 @@
 #pragma once
 
+//radians = deg * pi / 180
+//degrees = rad * 180 / pi
+const float PI = 3.141592653f;
+
 class Vector2
 {
 public:
@@ -254,6 +258,7 @@ public:
 	void rotateX(float radians);
 	void rotateY(float radians);
 	void rotateZ(float radians);
+	void rotateZDegrees(float degrees);
 	void rotate(float pitch, float yaw, float roll);
 
 	void setScaled(float x, float y, float z);

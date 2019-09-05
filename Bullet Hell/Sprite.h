@@ -10,6 +10,10 @@ public:
 	Sprite(SpriteType sprite);
 	~Sprite() {}
 
+	//call to change sprite currently being displayed
+	void changeSprite(SpriteType sprite);
+
+private:
 	void updateUVRect(aie::Renderer2D* renderer);
 
 	void update(GameObject* gameObject, float deltaTime) override { m_timer += deltaTime; };

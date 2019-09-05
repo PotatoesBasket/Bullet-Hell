@@ -14,6 +14,19 @@ Sprite::Sprite(SpriteType sprite)
 	m_spriteHeight = m_texture->as<aie::Texture>()->getHeight() / m_rowCount;
 }
 
+void Sprite::changeSprite(SpriteType sprite)
+{
+	m_texture = ResourceManager::getInstance().loadTexture(sprite.filename);
+	m_columnCount = sprite.columnCount;
+	m_rowCount = sprite.rowCount;
+	m_animSpeed = sprite.animSpeed;
+
+	m_sheetWidth = m_texture->as<aie::Texture>()->getWidth();
+	m_sheetHeight = m_texture->as<aie::Texture>()->getHeight();
+	m_spriteWidth = m_texture->as<aie::Texture>()->getWidth() / m_columnCount;
+	m_spriteHeight = m_texture->as<aie::Texture>()->getHeight() / m_rowCount;
+}
+
 void Sprite::updateUVRect(aie::Renderer2D* renderer)
 {
 	//get size of single frame as percentage of total spritesheet

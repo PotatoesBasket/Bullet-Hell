@@ -86,34 +86,16 @@ void GameObject::setGlobalTransform(const Matrix3& m)
 	m_globalTransform = m;
 }
 
-void GameObject::setPosition(float x, float y)
+void GameObject::resetTransform()
 {
-	m_localTransform.translation = { x, y, 1 };
-	updateTransform();
+	m_localTransform = Matrix3::identity;
+	m_globalTransform = Matrix3::identity;
+	m_rotation = 0;
 }
 
-void GameObject::setPosition(const Vector2& v)
+Vector2 GameObject::getPosition()
 {
-	m_localTransform.translation = { v.x, v.y, 1 };
-	updateTransform();
-}
-
-void GameObject::setRotation(float radians)
-{
-	m_localTransform.setRotateZ(radians);
-	updateTransform();
-}
-
-void GameObject::setScale(float wMultiplier, float hMultiplier)
-{
-	m_localTransform.setScaled(wMultiplier, hMultiplier, 1);
-	updateTransform();
-}
-
-void GameObject::setScale(float multiplier)
-{
-	m_localTransform.setScaled(multiplier, multiplier, 1);
-	updateTransform();
+	return (Vector2(m_globalTransform.translation.x, m_globalTransform.translation.y));
 }
 
 void GameObject::move(float x, float y)
@@ -127,9 +109,18 @@ void GameObject::move(const Vector2& v)
 	updateTransform();
 }
 
-void GameObject::rotate(float radians)
+void GameObject::moveForward(float speed)
 {
-	m_localTransform.rotateZ(radians);
+	float x = -sinf(m_rotation * 3.1415926f / 180) * speed;
+	float y = cosf(m_rotation * 3.1415926f / 180) * speed;
+
+	move(x, y);
+}
+
+void GameObject::rotate(float degrees)
+{
+	m_rotation += degrees;
+	m_localTransform.rotateZDegrees(degrees);
 	updateTransform();
 }
 
@@ -138,7 +129,6 @@ void GameObject::scale(float wMultiplier, float hMultiplier)
 	m_localTransform.scale(wMultiplier, hMultiplier, 1);
 	updateTransform();
 }
-
 void GameObject::scale(float multiplier)
 {
 	m_localTransform.scale(Vector3(multiplier, multiplier, 1));

@@ -1,5 +1,6 @@
 #include "MathLibrary.h"
 #include <math.h>
+#include <assert.h>
 
 /////////////////////////////////
 //          Vector 2           //
@@ -56,7 +57,10 @@ Vector2& Vector2::operator *= (float scalar)
 Vector2 Vector2::operator / (float scalar) const
 {
 	if (scalar == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attepted to divide by zero (Vector2 / float)");
+		return *this; //return original vector
+	}
 
 	return { x / scalar, y / scalar };
 }
@@ -64,7 +68,10 @@ Vector2 Vector2::operator / (float scalar) const
 Vector2& Vector2::operator /= (float scalar)
 {
 	if (scalar == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attempted to divide by zero (Vector2 /= float)");
+		return *this; //return original vector
+	}
 
 	x /= scalar;
 	y /= scalar;
@@ -121,7 +128,10 @@ void Vector2::normalise()
 	float mag = vec.magnitude();
 
 	if (mag == 0)
-		return; //attempted to divide by zero, do nothing
+	{
+		assert(!"Attempted to divide by zero (Vector2 normalise())");
+		return; //do nothing
+	}
 
 	*this = vec / mag;
 }
@@ -133,7 +143,10 @@ Vector2 Vector2::normalised() const
 	float mag = vec.magnitude();
 
 	if (mag == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attempted to divide by zero (Vector2 normalised())");
+		return *this; //return original vector
+	}
 
 	return vec / mag;
 }
@@ -210,7 +223,10 @@ Vector3& Vector3::operator *= (float scalar)
 Vector3 Vector3::operator / (float scalar) const
 {
 	if (scalar == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attempted to divide by zero (Vector3 / float)");
+		return *this; //return original vector
+	}
 
 	return { x / scalar, y / scalar, z / scalar };
 }
@@ -218,7 +234,10 @@ Vector3 Vector3::operator / (float scalar) const
 Vector3& Vector3::operator /= (float scalar)
 {
 	if (scalar == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attempted to divide by zero (Vector3 /= float");
+		return *this; //return original vector
+	}
 
 	x /= scalar;
 	y /= scalar;
@@ -277,7 +296,10 @@ void Vector3::normalise()
 	float mag = vec.magnitude();
 
 	if (mag == 0)
-		return; //attempted to divide by zero, do nothing
+	{
+		assert(!"Attempted to divide by zero (Vector3 normalise())");
+		return; //do nothing
+	}
 
 	*this = vec / mag;
 }
@@ -289,7 +311,10 @@ Vector3 Vector3::normalised() const
 	float mag = vec.magnitude();
 
 	if (mag == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attempted to divide by zero (Vector3 normalised())");
+		return *this; //return original vector
+	}
 
 	return vec / mag;
 }
@@ -383,7 +408,10 @@ Vector4& Vector4::operator *= (float scalar)
 Vector4 Vector4::operator / (float scalar) const
 {
 	if (scalar == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attempted to divide by zero (Vector 4 / float)");
+		return *this; //return original vector
+	}
 
 	return { x / scalar, y / scalar, z / scalar, w / scalar };
 }
@@ -391,7 +419,10 @@ Vector4 Vector4::operator / (float scalar) const
 Vector4& Vector4::operator /= (float scalar)
 {
 	if (scalar == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attempted to divide by zero (Vector 4 /= float)");
+		return *this; //return original vector
+	}
 
 	x /= scalar;
 	y /= scalar;
@@ -452,7 +483,10 @@ void Vector4::normalise()
 	float mag = vec.magnitude();
 
 	if (mag == 0)
-		return; //attempted to divide by zero, do nothing
+	{
+		assert(!"Attempted to divide by zero (Vector4 normalise())");
+		return; //do nothing
+	}
 
 	*this = vec / mag;
 }
@@ -464,7 +498,10 @@ Vector4 Vector4::normalised() const
 	float mag = vec.magnitude();
 
 	if (mag == 0)
-		return *this; //attempted to divide by zero, return original vector
+	{
+		assert(!"Attempted to divide by zero (Vector4 normalised())");
+		return *this; //return original vector
+	}
 
 	return vec / mag;
 }
@@ -738,6 +775,11 @@ void Matrix3::rotateZ(float radians)
 	m.setRotateZ(radians);
 
 	*this = *this * m;
+}
+void Matrix3::rotateZDegrees(float degrees)
+{
+	float radians = degrees * (PI / 180);
+	rotateZ(radians);
 }
 
 void Matrix3::rotate(float pitch, float yaw, float roll)

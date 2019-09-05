@@ -8,4 +8,4 @@ struct BossType
 	float hurtRadius;
 };
 
-const BossType BOSS_SHION = { 500, 200, 200, 90 };
+const BossType BOSS_SHION = { 1000, 200, 200, 80 };

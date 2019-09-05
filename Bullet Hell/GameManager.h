@@ -22,11 +22,7 @@ public:
 	enum GameState
 	{
 		titleScreen,
-		debug_weapontest,
-		splash,
-		title,
-		levelSelect,
-		game
+		level1,
 	};
 
 	GameState getGameState() { return m_state; }
@@ -34,6 +30,14 @@ public:
 
 	bool checkPlaying() { return m_runApp; }
 	void exitGame() { m_runApp = false; }
+
+	int getTimer() { return (int)m_timer; }
+	void addTime(float value) { m_timer += value; }
+	void resetTimer() { m_timer = 0; }
+
+	long getPoints() { return m_points; }
+	void addPoints(int points);
+	void removePoints(int points);
 
 	void setPlayer(Player* player) { m_player = player; }
 	void removePlayer() { m_player = nullptr; }
@@ -43,19 +47,13 @@ public:
 	void removeBoss() { m_boss = nullptr; }
 	Boss* getBoss() { return m_boss; }
 
-	unsigned int getPoints() { return m_points; }
-	void addPoints(int points) { m_points += points; }
-	void removePoints(int points) { if ((m_points -= points) < 0) points = 0; }
-
-	//void saveData();
-	//void loadData();
-
 private:
-	GameState m_state = titleScreen;
 	bool m_runApp = true;
+	float m_timer = 0;
+	long m_points = 0;
+
+	GameState m_state = titleScreen;
 
 	Player* m_player = nullptr;
 	Boss* m_boss = nullptr;
-
-	unsigned int m_points = 0;
 };

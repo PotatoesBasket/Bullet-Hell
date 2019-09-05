@@ -5,16 +5,10 @@
 void Character::takeDamage(float damage)
 {
 	m_health -= (int)damage;
+	m_healthChanged = true;
 
-	if (m_health > 0)
-	{
-		//play damage animation
-	}
-	else
-	{
-		//death animation
+	if (m_health <= 0)
 		setActiveState(false);
-	}
 }
 
 void Character::checkLevelBoundary()

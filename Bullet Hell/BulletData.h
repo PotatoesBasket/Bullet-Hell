@@ -20,5 +20,9 @@ struct BulletType
 	float shotDelay;
 };
 
+//player bullets
 const BulletType BULLET_PLAIN = { SPRITE_BULLET_PLAIN, 3, 1000, 5, 0.2f };
 const BulletType BULLET_BIG = { SPRITE_BULLET_BIG, 5, 200, 12, 0.4f };
+
+//boss bullets
+const BulletType BULLET_BOSS1 = { SPRITE_BULLET_BOSS1, 20, 500, 1, 0 };

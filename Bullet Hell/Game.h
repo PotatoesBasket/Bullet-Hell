@@ -3,7 +3,7 @@
 #include "Renderer2D.h"
 #include "GameManager.h"
 #include "TitleScreen.h"
-#include "Level_WeaponTest.h"
+#include "Level1.h"
 
 class Game : public aie::Application
 {
@@ -24,5 +24,5 @@ private:
 
 	//states
 	TitleScreen* m_menu = nullptr;
-	Level_WeaponTest* m_lvl1 = nullptr;
+	Level1* m_lvl1 = nullptr;
 };

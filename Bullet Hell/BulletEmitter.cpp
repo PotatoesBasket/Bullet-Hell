@@ -8,8 +8,8 @@ BulletEmitter::BulletEmitter(BulletType type, bool playerOwned)
 	m_pool = std::make_shared<BulletPool>(type, playerOwned);
 	addComponent(m_pool);
 
-	m_test = std::make_shared<Sprite>(SPRITE_EMITTER);
-	addComponent(m_test);
+	//m_test = std::make_shared<Sprite>(SPRITE_EMITTER);
+	//addComponent(m_test);
 }
 
 /*Shoots a bullet.*/

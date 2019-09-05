@@ -19,33 +19,46 @@ Player::Player(const Vector2& startPos, BulletType type1, BulletType type2,
 
 void Player::initialise(const Vector2& startPos)
 {
-	m_health = 100;
-
 	m_input = aie::Input::getInstance();
 	GameManager::getInstance().setPlayer(this);
 
-	//Place in world
-	setPosition(startPos);
+	//place in world
+	move(startPos);
 
-	//Add components
+	//construct components and child objects
 	m_sprite = std::make_shared<Sprite>(SPRITE_PLAYER_DEFAULT);
-	addComponent(m_sprite);
 
 	m_boundary = std::make_shared<BoxBoundary>(
 		startPos - Vector2(m_width * 0.5f, m_height * 0.5f),
 		startPos + Vector2(m_width * 0.5f, m_height * 0.5f));
-	addComponent(m_boundary);
-
-	m_hurtBox = std::make_shared<CircleBoundary>(startPos, m_hurtRadius);
-	addComponent(m_hurtBox);
+	m_hurtBox = std::make_shared<CircleBoundary>(
+		startPos, m_hurtRadius);
 
 	m_emitter1 = std::make_shared<BulletEmitter>(m_shot1, true);
-	addChild(m_emitter1.get());
-	m_emitter1->move(50, 0);
-
 	m_emitter2 = std::make_shared<BulletEmitter>(m_shot2, true);
+
+	//add components and children
+	addComponent(m_sprite);
+	addComponent(m_boundary);
+	addComponent(m_hurtBox);
+
+	addChild(m_emitter1.get());
 	addChild(m_emitter2.get());
-	m_emitter2->move(50, 0);
+
+	//set values
+	m_health = 3;
+	m_hurtBox->setOffset(Vector2(0, 10));
+
+	m_emitter1->move(50, 30);
+	m_emitter1->rotate(-90);
+	m_emitter2->move(50, -30);
+	m_emitter2->rotate(-90);
+
+	//make sure relevant spritesheets are loaded
+	//and stay loaded while player exists
+	anim_default = std::make_shared<Sprite>(SPRITE_PLAYER_DEFAULT);
+	anim_dmg1 = std::make_shared<Sprite>(SPRITE_PLAYER_DMG1);
+	anim_dmg2 = std::make_shared<Sprite>(SPRITE_PLAYER_DMG2);
 }
 
 Player::~Player()
@@ -97,8 +110,31 @@ void Player::checkFire()
 	}
 }
 
+void Player::updateAnimation()
+{
+	if (m_healthChanged == true)
+	{
+		switch (m_health)
+		{
+		case 3:
+			m_sprite->changeSprite(SPRITE_PLAYER_DEFAULT);
+			break;
+
+		case 2:
+			m_sprite->changeSprite(SPRITE_PLAYER_DMG1);
+			break;
+
+		case 1:
+			m_sprite->changeSprite(SPRITE_PLAYER_DMG2);
+			break;
+		}
+	}
+	m_healthChanged = false;
+}
+
 void Player::characterUpdate(float deltaTime)
 {
+	updateAnimation();
 	checkMovement(deltaTime);
 	checkCollision();
 	checkFire();

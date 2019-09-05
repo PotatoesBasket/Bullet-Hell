@@ -6,33 +6,46 @@ TitleScreen::TitleScreen()
 {
 	m_input = aie::Input::getInstance();
 
-	//tiled background
-	int idx = 0;
-	for (int x = 0; x < 5; ++x)
-		for (int y = 0; y < 3; ++y)
-		{
-			m_bgtiles[idx] = std::make_shared<Decoration>(SPRITE_TITLETILE, Vector2(1024 * x, 1024 * y));
-			addChild(m_bgtiles[idx].get());
-			++idx;
-		}
-
 	//create objects
-	m_title = std::make_shared<Text>(FONT_TITLE_WHT, "aestivation");
+	m_title = std::make_shared<Text>(FONT_TITLE, "bad programmer art");
+	m_title2 = std::make_shared<Text>(FONT_TITLE2, "ADVENTURE");
+	m_subtitle = std::make_shared<Text>(FONT_SUBTITLE, "(deadlines and aesthetic don't mix)");
 	m_buttonStart = std::make_shared<Button>(BUTTON_TITLESCR, "begin");
 	m_buttonExit = std::make_shared<Button>(BUTTON_TITLESCR, "quit");
-	m_flower = std::make_shared<Decoration>(SPRITE_YELLOWFLOWER, Vector2(SCR_WIDTH * 0.25, SCR_HALFHEIGHT * 0.5));
+	m_player = std::make_shared<Decoration>(SPRITE_PLAYER_TUTORIAL);
 
 	//add objects to scene's children (render order first to last)
-	addChild(m_flower.get());
 	addChild(m_title.get());
+	addChild(m_title2.get());
+	addChild(m_subtitle.get());
 	addChild(m_buttonStart.get());
 	addChild(m_buttonExit.get());
+	addChild(m_player.get());
 
 	//initialise values
-	m_title->setPosition(SCR_HALFWIDTH - m_title->getHalfWidth(), SCR_HALFHEIGHT + 50);
-	m_buttonStart->setPosition(SCR_HALFWIDTH - m_buttonStart->getTextHalfWidth(), SCR_HALFHEIGHT - 90);
+	m_title->move(
+		SCR_HALFWIDTH - m_title->getHalfWidth(), //centered
+		SCR_HEIGHT - 220); //anchored to top
+
+	m_title2->move(
+		SCR_HALFWIDTH - m_title2->getHalfWidth(),
+		SCR_HEIGHT - 320);
+
+	m_subtitle->move(
+		SCR_HALFWIDTH - m_subtitle->getHalfWidth(),
+		SCR_HEIGHT - 360);
+
+	m_buttonStart->move(
+		SCR_HALFWIDTH - m_buttonStart->getTextHalfWidth(),
+		SCR_HALFHEIGHT - 90);
+
+	m_buttonExit->move(
+		SCR_HALFWIDTH - m_buttonExit->getTextHalfWidth(),
+		SCR_HALFHEIGHT - 130);
+
+	m_player->move(500, 200);
+
 	m_buttonStart->setState(Button::hover);
-	m_buttonExit->setPosition(SCR_HALFWIDTH - m_buttonExit->getTextHalfWidth(), SCR_HALFHEIGHT - 120);
 	m_buttonExit->setState(Button::standard);
 }
 
@@ -70,7 +83,7 @@ void TitleScreen::checkInput()
 		{
 		case onStart:
 			m_buttonStart->setState(Button::press);
-			m_manager.setGameState(GameManager::debug_weapontest);
+			m_manager.setGameState(GameManager::level1);
 			break;
 		case onExit:
 			m_buttonExit->setState(Button::press);
@@ -84,8 +97,6 @@ void TitleScreen::onUpdate(float deltaTime)
 {
 	//input delay
 	m_inputTimer += deltaTime;
-
-	m_flower->rotate(0.05f * deltaTime);
 
 	if (m_inputTimer > m_inputDelay)
 		checkInput();

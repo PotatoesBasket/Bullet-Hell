@@ -10,7 +10,7 @@ public:
 	~Text() {}
 
 	/*Changes text displayed.*/
-	void updateText(const char* text) { m_text = text; }
+	void updateText(std::string text) { m_text = text; }
 
 	float getHalfWidth(); //for centering things properly
 	float getHalfHeight();
@@ -20,6 +20,6 @@ public:
 
 private:
 	std::shared_ptr<ResourceBase> m_font = nullptr;
-	const char* m_text = "a";
+	std::string m_text = "???";
 	Vector4 m_colour = Vector4(1, 1, 1, 1);
 };

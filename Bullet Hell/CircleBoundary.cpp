@@ -38,19 +38,19 @@ bool CircleBoundary::overlaps(std::shared_ptr<BoxBoundary> box) const
 
 void CircleBoundary::earlyUpdatePosition(GameObject* gameObject)
 {
-	m_center.x = gameObject->getGlobalTransform().translation.x;
-	m_center.y = gameObject->getGlobalTransform().translation.y;
+	m_center.x = gameObject->getGlobalTransform().translation.x + m_offset.x;
+	m_center.y = gameObject->getGlobalTransform().translation.y + m_offset.y;
 }
 
 void CircleBoundary::update(GameObject* gameObject, float deltaTime)
 {
-	m_center.x = gameObject->getGlobalTransform().translation.x;
-	m_center.y = gameObject->getGlobalTransform().translation.y;
+	m_center.x = gameObject->getGlobalTransform().translation.x + m_offset.x;
+	m_center.y = gameObject->getGlobalTransform().translation.y + m_offset.y;
 }
 
 void CircleBoundary::draw(GameObject* gameObject, aie::Renderer2D* renderer)
 {
-	renderer->setRenderColour(0, 0, 255, 1);
-	renderer->drawCircle(m_center.x, m_center.y, m_radius, 20);
-	renderer->setRenderColour(1, 1, 1, 1);
+	//renderer->setRenderColour(0, 0, 1, 0.5f);
+	//renderer->drawCircle(m_center.x, m_center.y, m_radius, 0);
+	//renderer->setRenderColour(1, 1, 1, 1);
 }

@@ -11,7 +11,9 @@ bool Game::startup()
 	m_input = aie::Input::getInstance();
 
 	m_menu = new TitleScreen();
-	m_lvl1 = new Level_WeaponTest();
+	m_lvl1 = new Level1();
+
+	setBackgroundColour(1, 1, 1, 1);
 
 	return true;
 }
@@ -25,12 +27,17 @@ void Game::shutdown()
 
 void Game::update(float deltaTime)
 {
+	if (!m_lvl1)
+	{
+		m_lvl1 = new Level1();
+	}
+
 	switch (m_manager.getGameState())
 	{
 	case GameManager::titleScreen:
 		m_menu->update(deltaTime);
 		break;
-	case GameManager::debug_weapontest:
+	case GameManager::level1:
 		m_lvl1->update(deltaTime);
 		break;
 	}
@@ -49,7 +56,7 @@ void Game::draw()
 	case GameManager::titleScreen:
 		m_menu->draw(m_2dRenderer);
 		break;
-	case GameManager::debug_weapontest:
+	case GameManager::level1:
 		m_lvl1->draw(m_2dRenderer);
 		break;
 	}

@@ -34,14 +34,18 @@ public:
 
 	void setLocalTransform(const Matrix3& m);
 	void setGlobalTransform(const Matrix3& m);
-	void setPosition(float x, float y);
-	void setPosition(const Vector2& v);
-	void setRotation(float radians);
-	void setScale(float wMultiplier, float hMultiplier);
-	void setScale(float multiplier);
+
+	void resetTransform();
+
+	Vector2 getPosition();
 	void move(float x, float y);
 	void move(const Vector2& v);
-	void rotate(float radians);
+	void moveForward(float speed); //move object relative to rotation
+
+	float getRotation() { return m_rotation; }
+	void resetRotation() { m_rotation = 0; }
+	void rotate(float degrees);
+
 	void scale(float wMultiplier, float hMultiplier);
 	void scale(float multiplier);
 
@@ -68,6 +72,7 @@ protected:
 
 	Matrix3 m_localTransform = Matrix3::identity;
 	Matrix3 m_globalTransform = Matrix3::identity;
+	float m_rotation = 0; //cheating lol
 
 	GameObject* m_parent = nullptr;
 	std::vector<GameObject*> m_children;

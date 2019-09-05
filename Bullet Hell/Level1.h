@@ -4,11 +4,11 @@
 #include "HUD.h"
 #include "Decoration.h"
 
-class Level_WeaponTest : public GameObject
+class Level1 : public GameObject
 {
 public:
-	Level_WeaponTest();
-	~Level_WeaponTest();
+	Level1();
+	~Level1();
 
 	void onUpdate(float deltaTime) override;
 
@@ -17,7 +17,5 @@ private:
 	Boss* m_boss = nullptr;
 	HUD* m_hud = nullptr;
 
-	Decoration* m_rose = nullptr;
-
-	float m_timer = 0.0f;
+	float m_endTimer = 0;
 };

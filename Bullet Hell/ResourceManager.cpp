@@ -6,9 +6,11 @@ std::shared_ptr<ResourceBase> ResourceManager::loadFont(const std::string filena
 	std::vector<std::shared_ptr<ResourceBase>>::iterator it;
 	for (it = m_resources.begin(); it != m_resources.end(); ++it)
 	{
-		if (filename.compare((*it)->getFilename()) == 0)
+		//if filename and size match, resource already exists
+		if (filename.compare((*it)->getFilename()) == 0 &&
+			size == (*it)->as<aie::Font>()->getStringHeight(".") )
 		{
-			return *it;
+			return *it; //return found resource
 		}
 	}
 

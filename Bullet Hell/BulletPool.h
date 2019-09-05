@@ -21,5 +21,5 @@ public:
 
 private:
 	std::vector<Bullet*> m_bulletList;
-	const unsigned int m_totalCount = 100;
+	const unsigned int m_totalCount = 40;
 };

@@ -10,6 +10,8 @@ public:
 	~Character() {}
 
 	std::shared_ptr<CircleBoundary> getHurtBox() { return m_hurtBox; }
+
+	int getHealth() { return m_health; }
 	void takeDamage(float damage);
 
 	void checkLevelBoundary();
@@ -21,6 +23,7 @@ public:
 
 protected:
 	int m_health = 0;
+	bool m_healthChanged = false;
 
 	std::shared_ptr<Sprite>			m_sprite;
 	std::shared_ptr<BoxBoundary>	m_boundary;

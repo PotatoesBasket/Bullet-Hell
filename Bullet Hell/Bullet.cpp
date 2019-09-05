@@ -1,5 +1,6 @@
 #include "Bullet.h"
 #include "GameManager.h"
+#include "ScreenData.h"
 
 Bullet::Bullet(BulletType type, bool playerOwned)
 {
@@ -15,16 +16,42 @@ Bullet::Bullet(BulletType type, bool playerOwned)
 
 void Bullet::movement(float deltaTime)
 {
-	move(m_type.baseSpeed * m_spdMod * deltaTime, 0); //just goes left to right for now
+	switch (m_movement)
+	{
+	case MoveType::straight:
+
+		moveForward(m_type.baseSpeed * m_spdMod * deltaTime);
+		break;
+
+	case MoveType::wave:
+
+		moveForward(m_type.baseSpeed * m_spdMod * deltaTime);
+		//move() sin stuff
+		break;
+
+	case MoveType::homing:
+
+		moveForward(m_type.baseSpeed * m_spdMod * deltaTime);
+		break;
+	}
 }
 
 void Bullet::checkLifetime(float deltaTime)
 {
 	m_timer += deltaTime;
 
-	if (m_timer >= m_lifetime)
+	//deactivate
+	if (m_timer >= m_lifetime || //if bullet has existed for too long
+		getPosition().x < 0 - 50 || //or has left the screen boundary
+		getPosition().x > SCR_WIDTH + 50 ||
+		getPosition().y < 0 - 50 ||
+		getPosition().y > SCR_HEIGHT + 50 )
 	{
-		GameManager::getInstance().removePoints(10);
+		//minus points every missed bullet from the player
+		if (m_playerOwned)
+			GameManager::getInstance().removePoints(10);
+
+		//deactivate
 		m_timer = 0;
 		setActiveState(false);
 	}

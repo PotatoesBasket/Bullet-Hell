@@ -19,11 +19,13 @@ public:
 	bool overlaps(std::shared_ptr<CircleBoundary> other) const;
 	bool overlaps(std::shared_ptr<BoxBoundary> box) const;
 
+	void setOffset(const Vector2& offset) { m_offset += offset; }
 	void earlyUpdatePosition(GameObject* gameObject); //for that one time with the bullets
 	void update(GameObject* gameObject, float deltaTime) override; //update position
 	void draw(GameObject* gameObject, aie::Renderer2D* renderer) override; //debug only
 
 private:
 	Vector2 m_center;
+	Vector2 m_offset;
 	float m_radius;
 };

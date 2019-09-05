@@ -36,12 +36,12 @@ void BoxBoundary::update(GameObject* gameObject, float deltaTime)
 
 void BoxBoundary::draw(GameObject* gameObject, aie::Renderer2D* renderer)
 {
-	renderer->setRenderColour(255, 0, 0, 1);
-	renderer->drawLine(m_min.x, m_min.y, m_max.x, m_min.y, 1, 0); //bottom
-	renderer->drawLine(m_max.x, m_min.y, m_max.x, m_max.y, 1, 0); //right
-	renderer->drawLine(m_max.x, m_max.y, m_min.x, m_max.y, 1, 0); //top
-	renderer->drawLine(m_min.x, m_max.y, m_min.x, m_min.y, 1, 0); //left
-	renderer->setRenderColour(1, 1, 1, 1);
+	//renderer->setRenderColour(255, 0, 0, 1);
+	//renderer->drawLine(m_min.x, m_min.y, m_max.x, m_min.y, 1, 0); //bottom
+	//renderer->drawLine(m_max.x, m_min.y, m_max.x, m_max.y, 1, 0); //right
+	//renderer->drawLine(m_max.x, m_max.y, m_min.x, m_max.y, 1, 0); //top
+	//renderer->drawLine(m_min.x, m_max.y, m_min.x, m_min.y, 1, 0); //left
+	//renderer->setRenderColour(1, 1, 1, 1);
 }
 
 float BoxBoundary::clamp(float t, float a, float b) const

@@ -26,9 +26,10 @@ void BulletPool::activateNext(GameObject* origin)
 	{
 		if ((*it)->isActive() == false)
 		{
-			//(*it)->setGlobalTransform(origin->getGlobalTransform());
-			(*it)->setPosition(origin->getGlobalTransform().translation.x,
+			(*it)->resetTransform();
+			(*it)->move(origin->getGlobalTransform().translation.x,
 				origin->getGlobalTransform().translation.y);
+			(*it)->rotate(origin->getRotation());
 			(*it)->getHitBox()->earlyUpdatePosition(origin);
 			(*it)->setActiveState(true);
 			break;
